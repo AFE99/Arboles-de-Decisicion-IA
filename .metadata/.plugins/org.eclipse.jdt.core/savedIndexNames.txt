@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+D:\COPIA\UTN\5to\Inteligencia Artificial\TPI\tpi-grupo10\.metadata\.plugins\org.eclipse.jdt.core
+3021444152.index
+3719122292.index
+1022857172.index
+1208075789.index
