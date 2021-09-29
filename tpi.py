@@ -13,16 +13,16 @@ fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
 table = [fmt.format(*row) for row in s]
 print('\n'.join(table))
 
-#Recorre ultima fila, salteando el encabezado de la misma
-list=[]
-for i in range(1,len(tabla)-1):
-    if ([tabla[i][len(tabla[1])-1],0]) in list:
-        #TERMINAR/ARREGLAR - Aca estoy intentando guardar la sumatoria de 'SI's y 'NO's de la ultima columna
-        for k in range(1,len(tabla)-1):
-            if 'a'=='a':
-                list[k]='PROBANDO'
-                print('PROBANDO')
-
+#Inicializo listas
+list=[] #lista que resguarda las variables existentes en el conjunto D
+cont=[] #Lista que contabiliza las apariciones de las variables del conjunto D
+#Recorre ultima fila (salteando el encabezado de la misma) para contabilizar la cantidad de apariciones de las variables del conjunto D
+for i in range(1,len(tabla)):
+    if (tabla[i][len(tabla[1])-1]) in list:
+        aux = list.index(tabla[i][len(tabla[1])-1]) #Posicion de la variable del conjunto D
+        cont[aux]=cont[aux]+1 #Contabilizo la variable en una segunda lista (cont)
     else:
-        list.append([(tabla[i][len(tabla[1])-1]),0])
+        list.append(tabla[i][len(tabla[1])-1]) #Resguardo variable del conjunto D agregandola en una posicion de la lista "list"
+        cont.append(1) #Agrego una posicion a la lista "cont" inicializada en 1, por la aparición de la variable
 print(list)
+print(cont)
