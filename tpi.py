@@ -26,3 +26,20 @@ for i in range(1,len(tabla)):
         cont.append(1) #Agrego una posicion a la lista "cont" inicializada en 1, por la aparición de la variable
 print(list)
 print(cont)
+
+
+def form(a,b): 
+    import math
+    c = -((a/b)*math.log(a/b,2))
+    return(c)
+
+
+#Definicion de funcion que calcula la Entropia del conjunto D
+def calcEntropy(listCant):
+    entropy=0 #Inicializo la entropia a cero
+    tot = sum(listCant) #Calculo el total
+    for i in range(len(listCant)):
+        entropy=entropy+form(listCant[i],tot)
+    print("La entropia resultante es: "+str(entropy))
+
+calcEntropy(cont)
