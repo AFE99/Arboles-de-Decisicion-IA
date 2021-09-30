@@ -3,11 +3,10 @@ import csv
 import math
 
 tabla = []
-with open("./prueba2.csv") as csvfile:
+with open("./prueba.csv") as csvfile:
     reader = csv.reader(csvfile) # change contents to floats
     for row in reader: # each row is a list
         tabla.append(row)
-
 #Pretty Print de la tabla by stackoverflow
 s = [[str(e) for e in row] for row in tabla]
 lens = [max(map(len, col)) for col in zip(*s)]
@@ -20,7 +19,7 @@ list=[] #lista que resguarda las variables existentes en el conjunto D
 cont=[] #Lista que contabiliza las apariciones de las variables del conjunto D
 #Recorre ultima fila (salteando el encabezado de la misma) para contabilizar la cantidad de apariciones de las variables del conjunto D
 for i in range(1,len(tabla)):
-    print(tabla[i][len(tabla[1])-3])
+    # print(tabla[i][len(tabla[1])-3])
     if (tabla[i][len(tabla[1])-1]) in list:
         aux = list.index(tabla[i][len(tabla[1])-1]) #Posicion de la variable del conjunto D
         cont[aux]=cont[aux]+1 #Contabilizo la variable en una segunda lista (cont)

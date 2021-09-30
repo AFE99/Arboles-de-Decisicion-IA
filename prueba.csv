@@ -1,11 +1,11 @@
-id,Hipertenso,Colesterol,Triglicéridos,Diabetico,Problemas Cardiacos
-1,NO,Alto,Menor 40,NO,SI
-2,NO,Alto,Mayor a 60,SI,NO
-3,NO,Alto,Entre 40-60,SI,SI
-4,NO,Alto,Mayor a 60,NO,NO
-5,SI,Medio,Entre 40-60,NO,SI
-6,NO,Alto,Menor 40,SI,SI
-7,NO,Alto,Entre 40-60,NO,NO
-8,SI,Alto,Menor 40,SI,SI
-9,NO,Bajo,Menor 40,NO,NO
-10,SI,Medio,Entre 40-60,SI,SI
+id,Hipertenso,Colesterol,Trigliceridos,Edad,Diabetico,Problemas Cardiacos
+1,NO,Bajo,Normal,Menor 40,SI,NO
+2,SI,Bajo,Elevado,Menor 40,SI,NO
+3,SI,Bajo,Elevado,Mayor a 60,SI,SI
+4,SI,Medio,Elevado,Mayor a 60,NO,SI
+5,NO,Medio,Elevado,Menor 40,NO,SI
+6,NO,Medio,Normal,Entre 40-60,SI,NO
+7,SI,Alto,Normal,Entre 40-60,SI,SI
+8,SI,Alto,Normal,Entre 40-60,SI,SI
+9,SI,Alto,Elevado,Mayor a 60,NO,SI
+10,NO,Alto,Normal,Menor 40,NO,NO
