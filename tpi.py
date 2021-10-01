@@ -43,6 +43,8 @@ def calcEntropy(listCant):
         entropy=entropy+form(listCant[i],tot)
     print("La entropia resultante es: "+str(entropy))
 
+    return entropy
+
 def calcEntropyAtr(table):
     entropys = {} #Diccionario donde se cargaran las entropias de cada Atributo
 
@@ -64,13 +66,28 @@ def calcEntropyAtr(table):
         for idx in valores:
             cantidad=valores[idx]["cantidad"]
             valores[idx].pop("cantidad")
-            variablesFuncion=[]
+
             for var in valores[idx]:
                 entropys[table[0][x]]+=cantidad/(len(table)-1) * (-valores[idx][var]/cantidad * math.log(valores[idx][var]/cantidad, 2))
         entropys[table[0][x]]=round(entropys[table[0][x]], 3)
     print("Entropia de las variables: ",entropys)
+    return entropys
+
+def mejorGanancia(EntropyD, EntropysAtr):
+    ganancia= 0
+
+    for e in EntropysAtr:
+        ganAux= EntropyD - EntropysAtr[e] 
+        if ganAux > ganancia:
+            ganancia = ganAux
+            Nodo=e
+
+    print("Nodo Raiz según Ganancia: " ,Nodo)
+
+    return ganancia
 
 
 
-calcEntropy(cont)
-calcEntropyAtr(tabla)
+# calcEntropy(cont)
+# calcEntropyAtr(tabla)
+mejorGanancia(calcEntropy(cont),calcEntropyAtr(tabla))
