@@ -67,21 +67,26 @@ class GenerarArbol:
                 else:
                     valores[campo]={"cantidad":1}           
                     valores[campo][self.tablaTemp[y][columnas]]=1 
-            self.entropysAtr[self.tablaTemp[0][x]]=0
+            self.entropysAtr[self.tablaTemp[0][x]]={"entropia":0}
+            print("VALORESSSS",valores)
             for idx in valores:
                 cantidad=valores[idx]["cantidad"]
+                print("Valores",valores[idx])
                 valores[idx].pop("cantidad")
+                print("Valores",valores[idx])
 
                 for var in valores[idx]:
-                    self.entropysAtr[self.tablaTemp[0][x]]+=cantidad/(len(self.tablaTemp)-1) * (-valores[idx][var]/cantidad * math.log(valores[idx][var]/cantidad, 2))
-            self.entropysAtr[self.tablaTemp[0][x]]=round(self.entropysAtr[self.tablaTemp[0][x]], 3)
+                    print(valores[idx][var])
+                    self.entropysAtr[self.tablaTemp[0][x]]["entropia"]+=cantidad/(len(self.tablaTemp)-1) * (-valores[idx][var]/cantidad * math.log(valores[idx][var]/cantidad, 2))
+                    self.entropysAtr[self.tablaTemp[0][x]][var] = cantidad
+            self.entropysAtr[self.tablaTemp[0][x]]["entropia"]=round(self.entropysAtr[self.tablaTemp[0][x]]["entropia"], 3)
         print("Entropia de las variables: ",self.entropysAtr)
 
     def mejorGanancia(self):
         ganancia= 0
 
         for e in self.entropysAtr:
-            ganAux= self.entropyD - self.entropysAtr[e] 
+            ganAux= self.entropyD - self.entropysAtr[e]["entropia"] 
             if ganAux > ganancia:
                 ganancia = ganAux
                 Nodo=e
