@@ -67,43 +67,54 @@ class GenerarArbol:
                 else:
                     valores[campo]={"cantidad":1}           
                     valores[campo][self.tablaTemp[y][columnas]]=1 
-            self.entropysAtr[self.tablaTemp[0][x]]={"entropia":0}
+            self.entropysAtr[self.tablaTemp[0][x]]={"entropia":0,"Djs":[]}
             print("VALORESSSS",valores)
             for idx in valores:
                 cantidad=valores[idx]["cantidad"]
                 print("Valores",valores[idx])
                 valores[idx].pop("cantidad")
                 print("Valores",valores[idx])
-
+                
+                self.entropysAtr[self.tablaTemp[0][x]]["Djs"].append(cantidad)
                 for var in valores[idx]:
                     print(valores[idx][var])
                     self.entropysAtr[self.tablaTemp[0][x]]["entropia"]+=cantidad/(len(self.tablaTemp)-1) * (-valores[idx][var]/cantidad * math.log(valores[idx][var]/cantidad, 2))
-                    self.entropysAtr[self.tablaTemp[0][x]][var] = cantidad
             self.entropysAtr[self.tablaTemp[0][x]]["entropia"]=round(self.entropysAtr[self.tablaTemp[0][x]]["entropia"], 3)
         print("Entropia de las variables: ",self.entropysAtr)
 
-    def mejorGanancia(self):
+    def mejorGananciayTasa(self):
         ganancia= 0
+        Tasaganancia= 0
+        tasaAux=0
 
         for e in self.entropysAtr:
-            ganAux= self.entropyD - self.entropysAtr[e]["entropia"] 
+            ganAux= self.entropyD - self.entropysAtr[e]["entropia"]
             if ganAux > ganancia:
                 ganancia = ganAux
-                Nodo=e
+                NodoG=e
+            
+            for Dj in self.entropysAtr[e]["Djs"]:
+                tasaAux+=-Dj/(len(self.tablaTemp)-1) * math.log(Dj/(len(self.tablaTemp)-1), 2)
+            # print(ganAux,tasaAux,"pri")
+            tasaAux=ganAux/tasaAux
+            
+            if tasaAux > Tasaganancia:
+                Tasaganancia = tasaAux
+                NodoTG=e
+            # print(tasaAux,"seg")
 
-        print("Nodo Raiz según Ganancia: " ,Nodo)
+        print("Nodo Raiz según Ganancia: " ,NodoG, " Nodo Raiz según Tasa Ganancia: ",NodoTG)
 
 
     def AlgoritmoC45(self):
         if False:
             print("primer condición base")
-            
-        if False:
+        elif False:
             print("segunda condición base")
-
-        self.calcEntropy(self.cont)
-        self.calcEntropyAtr()
-        self.mejorGanancia()
+        else:
+            self.calcEntropy(self.cont)
+            self.calcEntropyAtr()
+            self.mejorGananciayTasa()
 
 
 
