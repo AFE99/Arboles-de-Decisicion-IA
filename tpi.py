@@ -25,9 +25,9 @@ class GenerarArbol:
             self.Atributes.append(self.tabla[0][x])
         # print("Atributos: ",self.Atributes)
 
-        print("------------------------------------------------TABLA------------------------------------------------")
+        print("------------------------------------------------TABLA-----------------------------------------------")
         self.prettyPrint(self.tabla)
-        print("-----------------------------------------------------------------------------------------------------")
+        print("----------------------------------------------------------------------------------------------------")
         #Pretty Print de la tabla by stackoverflow
         # s = [[str(e) for e in row] for row in self.tabla]
         # lens = [max(map(len, col)) for col in zip(*s)]
