@@ -1,7 +1,7 @@
 #Convert csv to list by stackoverflow
 import csv
 import math
-
+from pprint import pprint
 class GenerarArbol:
     def __init__(self,path):
         
@@ -23,30 +23,40 @@ class GenerarArbol:
 
         for x in range(1,len(self.tabla[1])-1):
             self.Atributes.append(self.tabla[0][x])
-        print(self.Atributes)
+        # print("Atributos: ",self.Atributes)
 
+        print("------------------------------------------------TABLA------------------------------------------------")
+        self.prettyPrint(self.tabla)
+        print("-----------------------------------------------------------------------------------------------------")
         #Pretty Print de la tabla by stackoverflow
-        s = [[str(e) for e in row] for row in self.tabla]
+        # s = [[str(e) for e in row] for row in self.tabla]
+        # lens = [max(map(len, col)) for col in zip(*s)]
+        # fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
+        # self.tablaPrint = [fmt.format(*row) for row in s]
+        # print('\n'.join(self.tablaPrint))
+ 
+    def prettyPrint(self,table):
+        s = [[str(e) for e in row] for row in table]
         lens = [max(map(len, col)) for col in zip(*s)]
         fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
-        self.tablaPrint = [fmt.format(*row) for row in s]
-        print('\n'.join(self.tablaPrint))
-
+        table = [fmt.format(*row) for row in s]
+        print('\n'.join(table))
+    
+    #Método que contabiliza la cantidad de apariciones del conjunto D 
     def varConjD(self,Tabla):
         #Inicializo listas
         list=[] #lista que resguarda las variables existentes en el conjunto D
         cont=[] #Lista que contabiliza las apariciones de las variables del conjunto D
         #Recorre ultima fila (salteando el encabezado de la misma) para contabilizar la cantidad de apariciones de las variables del conjunto D
         for i in range(1,len(Tabla)):
-            # print(Tabla[i][len(Tabla[1])-3])
             if (Tabla[i][len(Tabla[1])-1]) in list:
                 aux = list.index(Tabla[i][len(Tabla[1])-1]) #Posicion de la variable del conjunto D
                 cont[aux]=cont[aux]+1 #Contabilizo la variable en una segunda lista (cont)
             else:
                 list.append(Tabla[i][len(Tabla[1])-1]) #Resguardo variable del conjunto D agregandola en una posicion de la lista "list"
                 cont.append(1) #Agrego una posicion a la lista "cont" inicializada en 1, por la aparición de la variable
-        print(list)
-        print(cont)
+        # print(list)
+        # print(cont)
         return cont
 
     def form(self,a,b): 
@@ -60,7 +70,7 @@ class GenerarArbol:
         tot = sum(listCant) #Calculo el total
         for i in range(len(listCant)):
             entropyD=entropyD+ self.form(listCant[i],tot)
-        print("La entropia resultante es: "+str(entropyD))
+        print("\n La entropia del conjunto D es: "+str(entropyD))
         return(entropyD)
 
     def calcEntropyAtr(self,Tabla,Atributes):
@@ -69,10 +79,12 @@ class GenerarArbol:
         # self.Atributes.remove("Edad")
         columnas=len(Tabla[1])-1
         entropysAtr = {}
-        print(Atributes)
+        # print(Atributes)
+        print("-----------------------------------------------------------------------------------------------------")
+        print("VALORES: ")
         for x in range(len(Atributes)): #Recorreremos la tabla por columnas para trabajar con cada Atributo por separado, salteamos la primera columna de ID
             Atr = Tabla[0].index(Atributes[x])
-            print(Atr)
+            print("\n",Tabla[0][Atr])
             valores = {} #Diccionario donde se cargaran los valores necesarios para calcular la entropia del atributo
             for y in range(1,len(Tabla)): #Para recorrer los valores de la columna del atributo en la que estamos posicionados, salteamos la primera fila que es la cabecera
                 campo = Tabla[y][Atr] #Se toma el valor que toma el atributo en esa fila
@@ -86,7 +98,7 @@ class GenerarArbol:
                     valores[campo]={"cantidad":1}           
                     valores[campo][Tabla[y][columnas]]=1 
             entropysAtr[Tabla[0][Atr]]={"entropia":0,"Djs":[],"Vars":[]}
-            print("VALORESSSS",valores)
+            pprint(valores, width=1)
             for idx in valores:
                 #print(idx,valores)
                 if idx not in  entropysAtr[Tabla[0][Atr]]["Vars"]:
@@ -99,9 +111,12 @@ class GenerarArbol:
                     #print(var,valores[idx],valores[idx][var])
                     entropysAtr[Tabla[0][Atr]]["entropia"]+=cantidad/(len(Tabla)-1) * (-valores[idx][var]/cantidad * math.log(valores[idx][var]/cantidad, 2))
             entropysAtr[Tabla[0][Atr]]["entropia"]=round(entropysAtr[Tabla[0][Atr]]["entropia"], 3)
-        print("Entropia de las variables: ",entropysAtr)
+        print("-----------------------------------------------------------------------------------------------------")
+        print("Entropia de las variables: ")
+        pprint(entropysAtr, width=1)
         return entropysAtr
 
+    # Funcion que calcula quien seria el siguiente nodo segun la ganancia y/o tasa de ganancia
     def mejorGananciayTasa(self,pg,entropysAtr,Tabla):
         ganancia= 0
         Tasaganancia= 0
@@ -122,9 +137,9 @@ class GenerarArbol:
                 Tasaganancia = tasaAux
                 NodoTG=e
             # print(tasaAux,"seg")
-
-        print("Nodo Raiz según Ganancia: " ,NodoG, " Nodo Raiz según Tasa Ganancia: ",NodoTG)
-
+        print("-----------------------------------------------------------------------------------------------------")
+        print("Nodo Raiz según Ganancia: " ,NodoG, "\nNodo Raiz según Tasa Ganancia: ",NodoTG)
+        print("*****************************************************************************************************")
         return NodoG
 
     def ObtenerParticion(self,Tabla,Atributo,Variable):
@@ -140,15 +155,15 @@ class GenerarArbol:
         return tablaTemp2
 
     def ExamplesSameClass(self,Tabla):
-        print("TABLA",Tabla)
+        # print("TABLA",Tabla)
         rows=len(Tabla)
         columnClass= len(Tabla[0])-1
-        print(columnClass)
+        # print(columnClass)
         marca=""
         if rows>1:
             marca=Tabla[1][columnClass]
             for x in range(2,len(Tabla)):
-                print("MARCA",marca,Tabla[x][columnClass])
+                # print("MARCA: ",marca,Tabla[x][columnClass])
                 if marca!=Tabla[x][columnClass]:
                     return False
         self.NodeSheet = marca
@@ -171,20 +186,18 @@ class GenerarArbol:
         return valorMasFreq
 
     def AlgoritmoC45(self,Tabla,Atributes,Tree):
-        print("ATRIBUTOSS",Atributes,len(Atributes))
+        print("\nArbol: ",Tree)
+        print("\n Los atributos identificados son: ",Atributes,len(Atributes))
         if self.ExamplesSameClass(Tabla):
             Tree.append(self.NodeSheet)
-            # self.Tree.append(Node(self.NodeSheet,self.NodeParent["parent"]))
-            # self.NodeParent.setChild[self.Tree[len(self.Tree)-1],self.NodeParent["branch"]]
+            # Tree.append(Node(self.NodeSheet,self.NodeParent["parent"]))
+            # self.NodeParent.setChild[Tree[len(Tree)-1],self.NodeParent["branch"]]
         elif len(Atributes) == 0:
-            print(Tabla)
+            print("No hay mas atributos a analizar, tabla= ", pprint(Tabla, width=1))
+            # print(Tabla)
             
             Tree.append(self.ValorMasFreq(Tabla))
-
-            print(Tree)
-
-
-            # for x in self.Tree:
+            # for x in Tree:
             #     print(x.getName())
             #     print(x.getChild())
             #     print(x.getParent())
@@ -192,43 +205,46 @@ class GenerarArbol:
             pg= self.calcEntropy(self.varConjD(Tabla))
 
             EntropysAtr = self.calcEntropyAtr(Tabla,Atributes)
-            print(EntropysAtr)
+            # print(EntropysAtr)
             Ag = self.mejorGananciayTasa(pg,EntropysAtr,Tabla)
 
             if False:
                 print("threshold section")
             else:
-                #self.Tree.append(Node(Ag,self.NodeParent["parent"]))
+                #Tree.append(Node(Ag,self.NodeParent["parent"]))
                 Tree.append(Ag)
                 # if self.NodeParent["parent"]!= None:
                 #     print(self.NodeParent["branch"])
                 #     print(self.NodeParent["parent"].getChild())
-                #     self.NodeParent["parent"].setChild(self.Tree[len(self.Tree)-1],self.NodeParent["branch"])
-                # self.NodeParent["parent"] = self.Tree[len(self.Tree)-1]
+                #     self.NodeParent["parent"].setChild(Tree[len(Tree)-1],self.NodeParent["branch"])
+                # self.NodeParent["parent"] = Tree[len(Tree)-1]
                 # print(self.NodeParent["parent"].getChild())
                 
                 #print(self.tabla)
                 Dpartition = []
-                print(EntropysAtr[Ag]["Vars"])
+                # print(EntropysAtr[Ag]["Vars"])
                 for var in EntropysAtr[Ag]["Vars"]:
                     Dpartition.append(self.ObtenerParticion(Tabla,Ag,var))
-                print(Dpartition)
-                
-                print(Ag,Atributes)
+                print("\nDpartition = ")
+                for i in range(len(Dpartition)):
+                    for j in range(len(Dpartition[i])):
+                        print(Dpartition[i][j])
+                # print(Dpartition)
+                # print(Ag,Atributes)
                 Atributes.remove(Ag)
                 for Dj in range(len(Dpartition)):
-                    self.Tree.append(EntropysAtr[Ag]["Vars"][Dj])
+                    Tree.append(EntropysAtr[Ag]["Vars"][Dj])
                     # self.NodeParent["branch"] = EntropysAtr[Ag]["Vars"][Dj]
                     # print(self.NodeParent["branch"])
                     # input()
-                    # self.Tree[len(self.Tree)-1].setChild(None,EntropysAtr[Ag]["Vars"][Dj])
+                    # Tree[len(Tree)-1].setChild(None,EntropysAtr[Ag]["Vars"][Dj])
                     
                     Tabla = Dpartition[Dj]
-                    print("ENTREEE")
+                    # print("ENTREEE")
                     self.AlgoritmoC45(Tabla,Atributes,Tree)
                 
-                #print(self.Tree[0].getChild())
-                print(self.Tree)
+                #print(Tree[0].getChild())
+                
 
 
 
