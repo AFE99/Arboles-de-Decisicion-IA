@@ -186,8 +186,7 @@ class GenerarArbol:
         return valorMasFreq
 
     def AlgoritmoC45(self,Tabla,Atributes,Tree):
-        print("\nArbol: ",Tree)
-        print("\n Los atributos identificados son: ",Atributes,len(Atributes))
+        
         if self.ExamplesSameClass(Tabla):
             Tree.append(self.NodeSheet)
             # Tree.append(Node(self.NodeSheet,self.NodeParent["parent"]))
@@ -244,7 +243,8 @@ class GenerarArbol:
                     self.AlgoritmoC45(Tabla,Atributes,Tree)
                 
                 #print(Tree[0].getChild())
-                
+        print("\nArbol: ",Tree)
+        print("\n Los atributos identificados son: ",Atributes,len(Atributes))           
 
 
 
@@ -279,5 +279,5 @@ class Node:
 # calcEntropy(cont)
 # calcEntropyAtr(tabla)
 if __name__ == "__main__":
-    Arbol = GenerarArbol("./prueba.csv")
+    Arbol = GenerarArbol("./prueba6.csv")
     Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,Arbol.Tree)

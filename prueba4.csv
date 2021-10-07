@@ -1,0 +1,14 @@
+ID,Comedy,Doctors,Lawyers,Guns,Likes
+1,false,true,false,false,false
+2,true,false,true,false,true
+3,false,false,true,true,true
+4,false,false,true,false,false
+5,false,false,false,true,false
+6,true,false,false,true,false
+7,true,false,false,false,true
+8,false,true,true,true,true
+9,false,true,true,false,false
+10,true,true,true,false,true
+11,true,true,false,true,false
+12,false,false,false,false,false
+13,true,true,false,false,true
