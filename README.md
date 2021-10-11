@@ -1,5 +1,5 @@
-#Proyecto de Inteligencia Aritificial
+# Proyecto de Inteligencia Aritificial
 
-##Arboles de decisión
+## Arboles de decisión
 
 tpi-grupo9
