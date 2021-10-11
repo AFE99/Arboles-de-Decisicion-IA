@@ -1,1 +1,4 @@
-# tpi-grupo10
+#Proyecto de Inteligencia Aritificial
+##Arboles de decisión
+
+## tpi-grupo10
