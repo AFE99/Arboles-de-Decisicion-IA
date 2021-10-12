@@ -1,6 +1,7 @@
 #Convert csv to list by stackoverflow
 import csv
 import math
+import copy
 from pprint import pprint
 class GenerarArbol:
     def __init__(self,path):
@@ -230,7 +231,10 @@ class GenerarArbol:
                         print(Dpartition[i][j])
                 # print(Dpartition)
                 # print(Ag,Atributes)
-                Atributes.remove(Ag)
+                
+                Atributes2 = copy.deepcopy(Atributes)
+                Atributes2.remove(Ag)                 
+        
                 for Dj in range(len(Dpartition)):
                     Tree.append(EntropysAtr[Ag]["Vars"][Dj])
                     # self.NodeParent["branch"] = EntropysAtr[Ag]["Vars"][Dj]
@@ -240,7 +244,7 @@ class GenerarArbol:
                     
                     Tabla = Dpartition[Dj]
                     # print("ENTREEE")
-                    self.AlgoritmoC45(Tabla,Atributes,Tree)
+                    self.AlgoritmoC45(Tabla,Atributes2,Tree)
                 
                 #print(Tree[0].getChild())
         print("\nArbol: ",Tree)
@@ -279,5 +283,5 @@ class Node:
 # calcEntropy(cont)
 # calcEntropyAtr(tabla)
 if __name__ == "__main__":
-    Arbol = GenerarArbol("./prueba6.csv")
+    Arbol = GenerarArbol("./prueba4.csv")
     Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,Arbol.Tree)
