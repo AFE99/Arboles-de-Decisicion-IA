@@ -196,17 +196,19 @@ class GenerarArbol:
     def AlgoritmoC45(self,Tabla,Atributes,Tree):
 
         if self.ExamplesSameClass(Tabla):
-            Tree.append(self.NodeSheet)
-            self.G.add_node(self.NodeSheet, color='green')
-            self.G.add_edge(self.NodeParent["parent"], self.NodeSheet, color='black',label=self.NodeParent["branch"])
-            # Tree.append(Node(self.NodeSheet,self.NodeParent["parent"]))
-            # self.NodeParent.setChild[Tree[len(Tree)-1],self.NodeParent["branch"]]
+            Tree[0].append(self.NodeSheet)
+            self.G.add_node("Nodo%i"%len(Tree[0]),label=self.NodeSheet, color='green')
+            self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='black',label=Tree[1]["branch"])
+            # Tree[0].append(Node(self.NodeSheet,Tree[1]["parent"]))
+            # Tree[1].setChild[Tree[0][len(Tree[0])-1],Tree[1]["branch"]]
         elif len(Atributes) == 0:
             print("No hay mas atributos a analizar, tabla= ", pprint(Tabla, width=1))
             # print(Tabla)
 
-            Tree.append(self.ValorMasFreq(Tabla))
-            # for x in Tree:
+            Tree[0].append(self.ValorMasFreq(Tabla))
+            self.G.add_node("Nodo%i"%len(Tree[0]),label=self.ValorMasFreq(Tabla), color='green')
+            self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='black',label=Tree[1]["branch"])
+            # for x in Tree[0]:
             #     print(x.getName())
             #     print(x.getChild())
             #     print(x.getParent())
@@ -220,22 +222,25 @@ class GenerarArbol:
             if False:
                 print("threshold section")
             else:
-                #Tree.append(Node(Ag,self.NodeParent["parent"]))
-                Tree.append(Ag)
-                
-                if self.NodeParent["parent"]== None:
-                    self.G.add_node(Ag, color='red')
-                else:
-                    self.G.add_node(Ag, color='blue')
-                    self.G.add_edge(self.NodeParent["parent"],Ag, color='black',label=self.NodeParent["branch"])
+                NodeParent = copy.deepcopy(Tree[1])
 
-                self.NodeParent["parent"] = Ag
-                # if self.NodeParent["parent"]!= None:
-                #     print(self.NodeParent["branch"])
-                #     print(self.NodeParent["parent"].getChild())
-                #     self.NodeParent["parent"].setChild(Tree[len(Tree)-1],self.NodeParent["branch"])
-                # self.NodeParent["parent"] = Tree[len(Tree)-1]
-                # print(self.NodeParent["parent"].getChild())
+                #Tree[0].append(Node(Ag,NodeParent["parent"]))
+                Tree[0].append(Ag)
+                
+                if NodeParent["parent"]== None:
+                    self.G.add_node(Ag, color='red')
+                    NodeParent["parent"] = Ag
+                else:
+                    self.G.add_node("Nodo%i"%len(Tree[0]),label=Ag, color='blue')
+                    self.G.add_edge(NodeParent["parent"],"Nodo%i"%len(Tree[0]), color='black',label=NodeParent["branch"])
+
+                    NodeParent["parent"] = "Nodo%i"%len(Tree[0])
+                # if NodeParent["parent"]!= None:
+                #     print(NodeParent["branch"])
+                #     print(NodeParent["parent"].getChild())
+                #     NodeParent["parent"].setChild(Tree[0][len(Tree[0])-1],NodeParent["branch"])
+                # NodeParent["parent"] = Tree[0][len(Tree[0])-1]
+                # print(NodeParent["parent"].getChild())
 
                 #print(self.tabla)
                 Dpartition = []
@@ -253,18 +258,17 @@ class GenerarArbol:
                 Atributes2.remove(Ag)
 
                 for Dj in range(len(Dpartition)):
-                    Tree.append(EntropysAtr[Ag]["Vars"][Dj])
-                    self.NodeParent["branch"] = EntropysAtr[Ag]["Vars"][Dj]
-                    # print(self.NodeParent["branch"])
+                    Tree[0].append(EntropysAtr[Ag]["Vars"][Dj])
+                    NodeParent["branch"] = EntropysAtr[Ag]["Vars"][Dj]
+                    # print(NodeParent["branch"])
                     # input()
-                    # Tree[len(Tree)-1].setChild(None,EntropysAtr[Ag]["Vars"][Dj])
+                    # Tree[0][len(Tree[0])-1].setChild(None,EntropysAtr[Ag]["Vars"][Dj])
 
                     Tabla = Dpartition[Dj]
                     # print("ENTREEE")
-                    self.AlgoritmoC45(Tabla,Atributes2,Tree)
+                    self.AlgoritmoC45(Tabla,Atributes2,[Tree[0],NodeParent])
 
-                #print(Tree[0].getChild())
-        print("\nArbol: ",Tree)
+        print("\nArbol: ",Tree[0])
         print("\n Los atributos identificados son: ",Atributes,len(Atributes))
 
 
@@ -338,8 +342,8 @@ class GraphicInterface:
         self.TituloMenu=tk.Label(self.miFrame1,bg="#9BBCD1", text="Generar Arboles de Decisión - Algoritmo C4.5",fg="#323638",font=("Ubuntu",25))
         self.TituloMenu.pack(fill="both",side="top")
 
-        Arbol = GenerarArbol("./prueba.csv")
-        Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,Arbol.Tree)
+        Arbol = GenerarArbol("./prueba2.csv")
+        Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
 
         # write to a dot file
         Arbol.G.write('test.dot')
