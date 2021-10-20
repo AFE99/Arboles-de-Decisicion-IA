@@ -3,7 +3,9 @@ import csv
 import math
 import copy
 from PIL import Image
-import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import (
+    FigureCanvasTkAgg, NavigationToolbar2Tk)
 import pygraphviz as pgv
 from pprint import pprint
 from tkinter import ttk
@@ -13,6 +15,7 @@ class GenerarArbol:
     def __init__(self,path):
 
         self.tabla = []  #Tabla original con todos los atributos y clases
+        self.TreexGan = True
         self.entropyD = 0
         self.entropysAtr = {}
         self.Tree = []
@@ -148,7 +151,11 @@ class GenerarArbol:
         print("-----------------------------------------------------------------------------------------------------")
         print("Nodo Raiz según Ganancia: " ,NodoG, "\nNodo Raiz según Tasa Ganancia: ",NodoTG)
         print("*****************************************************************************************************")
-        return NodoG
+        
+        if self.TreexGan:
+            return NodoG
+        else: 
+            return NodoTG
 
     def ObtenerParticion(self,Tabla,Atributo,Variable):
         tablaTemp2 = [Tabla[0]]
@@ -331,7 +338,7 @@ class GraphicInterface:
         #self.raiz.grab_set()
         self.raiz.title("TPI Inteligencia Artificial - Grupo 9")
         self.raiz.resizable(0,0)
-        self.raiz.geometry("800x550+300+40")
+        self.raiz.geometry("1200x690+70+20")
         self.raiz.config(bg="#9BBCD1")
 
         self.miFrame1=tk.Frame(self.raiz, width=800, height=100,bg="#9BBCD1",relief="groove", borderwidth=5)
@@ -342,7 +349,7 @@ class GraphicInterface:
         self.TituloMenu=tk.Label(self.miFrame1,bg="#9BBCD1", text="Generar Arboles de Decisión - Algoritmo C4.5",fg="#323638",font=("Ubuntu",25))
         self.TituloMenu.pack(fill="both",side="top")
 
-        Arbol = GenerarArbol("./prueba2.csv")
+        Arbol = GenerarArbol("./prueba.csv")
         Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
 
         # write to a dot file
@@ -352,12 +359,66 @@ class GraphicInterface:
         Arbol.G.layout(prog='dot') # use dot
 
         Arbol.G.draw('arbol.png')  
+        
+        Arbol = GenerarArbol("./prueba.csv")
+        Arbol.TreexGan=False
+        Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
 
-        plt.figure(figsize=(20,15),dpi=40)
+        # write to a dot file
+        Arbol.G.write('test.dot')
+
+        #create a png file
+        Arbol.G.layout(prog='dot') # use dot
+
+        Arbol.G.draw('arbol2.png')  
+
         image = Image.open('arbol.png')
-        plt.axis('off')
-        plt.imshow(image,aspect="auto")
-        plt.show()
+        self.fig = Figure(figsize=(9, 8), dpi=60)
+        self.ax = self.fig.gca()
+        self.ax.text(0.0,-5.0,"Arbol de Decisión segun Tasa Ganancia", fontsize=25)
+        self.ax.axis('off')
+        # self.fig.axis('off')
+        self.ax.imshow(image,aspect="auto")
+        #self.fig.add_subplot(111).plot([], [], marker = 'o')
+        self.fig.set_facecolor('#9BBCD1')
+
+        image2 = Image.open('arbol2.png')
+        self.fig2 = Figure(figsize=(9, 8), dpi=60)
+        self.ax2 = self.fig2.gca()
+        self.ax2.text(0.0,-5.0,"Arbol de Decisión segun Ganancia", fontsize=25)
+        self.ax2.axis('off')
+        # self.fig.axis('off')
+        self.ax2.imshow(image2,aspect="auto")
+        #self.fig2.add_subplot(111).plot([], [], marker = 'o')
+        self.fig2.set_facecolor('#9BBCD1')
+
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self.raiz)  # A tk.DrawingArea.
+        self.canvas.draw()
+        #canvas.get_tk_widget().grid(row=0,column=0,pady=5)
+
+        self.toolbar = NavigationToolbar2Tk(self.canvas, self.raiz)
+        self.toolbar.update()
+        #toolbar.pack(side="bottom",anchor=W)
+        self.canvas.get_tk_widget().place(x=-10,y=150)
+
+
+        self.canvas2 = FigureCanvasTkAgg(self.fig2, master=self.raiz)  # A tk.DrawingArea.
+        self.canvas2.draw()
+        #canvas.get_tk_widget().grid(row=0,column=0,pady=5)
+
+        self.toolbar2 = NavigationToolbar2Tk(self.canvas2, self.raiz)
+        self.toolbar2.update()
+        #toolbar2.pack(side="bottom",anchor=W)
+        self.canvas2.get_tk_widget().place(x=500,y=150)
+        self.toolbar.place(x=20,y=570)
+        self.toolbar2.place(x=590,y=570)
+
+        #fig2.add_subplot(111).axis("equal")
+        # plt.figure(figsize=(20,15),dpi=40)
+        # image = Image.open('arbol.png')
+        # plt.axis('off')
+        # plt.imshow(image,aspect="auto")
+        # plt.show()
 
 
 if __name__ == "__main__":
