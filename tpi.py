@@ -2,9 +2,13 @@
 import csv
 import math
 import copy
+from PIL import Image
+import matplotlib.pyplot as plt
+import pygraphviz as pgv
 from pprint import pprint
 from tkinter import ttk
 import tkinter as tk
+
 class GenerarArbol:
     def __init__(self,path):
 
@@ -14,6 +18,7 @@ class GenerarArbol:
         self.Tree = []
         self.NodeSheet = ""
         self.NodeParent = {"parent":None,"branch":None}
+        self.G=pgv.AGraph(directed=True)
 
         with open(path) as csvfile:
             reader = csv.reader(csvfile) # change contents to floats
@@ -192,6 +197,8 @@ class GenerarArbol:
 
         if self.ExamplesSameClass(Tabla):
             Tree.append(self.NodeSheet)
+            self.G.add_node(self.NodeSheet, color='green')
+            self.G.add_edge(self.NodeParent["parent"], self.NodeSheet, color='black',label=self.NodeParent["branch"])
             # Tree.append(Node(self.NodeSheet,self.NodeParent["parent"]))
             # self.NodeParent.setChild[Tree[len(Tree)-1],self.NodeParent["branch"]]
         elif len(Atributes) == 0:
@@ -215,6 +222,14 @@ class GenerarArbol:
             else:
                 #Tree.append(Node(Ag,self.NodeParent["parent"]))
                 Tree.append(Ag)
+                
+                if self.NodeParent["parent"]== None:
+                    self.G.add_node(Ag, color='red')
+                else:
+                    self.G.add_node(Ag, color='blue')
+                    self.G.add_edge(self.NodeParent["parent"],Ag, color='black',label=self.NodeParent["branch"])
+
+                self.NodeParent["parent"] = Ag
                 # if self.NodeParent["parent"]!= None:
                 #     print(self.NodeParent["branch"])
                 #     print(self.NodeParent["parent"].getChild())
@@ -239,7 +254,7 @@ class GenerarArbol:
 
                 for Dj in range(len(Dpartition)):
                     Tree.append(EntropysAtr[Ag]["Vars"][Dj])
-                    # self.NodeParent["branch"] = EntropysAtr[Ag]["Vars"][Dj]
+                    self.NodeParent["branch"] = EntropysAtr[Ag]["Vars"][Dj]
                     # print(self.NodeParent["branch"])
                     # input()
                     # Tree[len(Tree)-1].setChild(None,EntropysAtr[Ag]["Vars"][Dj])
@@ -323,10 +338,26 @@ class GraphicInterface:
         self.TituloMenu=tk.Label(self.miFrame1,bg="#9BBCD1", text="Generar Arboles de Decisión - Algoritmo C4.5",fg="#323638",font=("Ubuntu",25))
         self.TituloMenu.pack(fill="both",side="top")
 
+        Arbol = GenerarArbol("./prueba.csv")
+        Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,Arbol.Tree)
+
+        # write to a dot file
+        Arbol.G.write('test.dot')
+
+        #create a png file
+        Arbol.G.layout(prog='dot') # use dot
+
+        Arbol.G.draw('arbol.png')  
+
+        plt.figure(figsize=(20,15),dpi=40)
+        image = Image.open('arbol.png')
+        plt.axis('off')
+        plt.imshow(image,aspect="auto")
+        plt.show()
+
+
 if __name__ == "__main__":
     raizMaster = tk.Tk()
     Programa = GraphicInterface(raizMaster,tk)
     raizMaster.mainloop()
     
-    Arbol = GenerarArbol("./prueba4.csv")
-    Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,Arbol.Tree)
