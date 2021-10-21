@@ -410,9 +410,9 @@ class GraphicInterface:
         # self.toolbar2 = NavigationToolbar2Tk(self.canvas2, self.raiz)
         # self.toolbar2.update()
         #toolbar2.pack(side="bottom",anchor=W)
-        self.canvas2.get_tk_widget().place(x=530,y=150)
+        # self.canvas2.get_tk_widget().place(x=530,y=150)
         self.toolbar.place(x=3,y=634)
-        self.toolbar2.place(x=612,y=634)
+        # self.toolbar2.place(x=612,y=634)
 
         #fig2.add_subplot(111).axis("equal")
         # plt.figure(figsize=(20,15),dpi=40)
