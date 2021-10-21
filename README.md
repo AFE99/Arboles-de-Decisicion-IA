@@ -1,4 +1,4 @@
-# Proyecto de Inteligencia Aritificial
+# Proyecto de Inteligencia Artificial
 
 ## Arboles de decisión
 
