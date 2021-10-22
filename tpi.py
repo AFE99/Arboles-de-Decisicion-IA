@@ -353,7 +353,7 @@ class GraphicInterface:
         menubar1.add_cascade(label="Archivo", menu=opciones1)
 
     def abrirAr(self):
-        nombrearch=fd.askopenfilename(initialdir = "/",title = "Seleccione archivo",filetypes = (("txt files","*.txt"),("todos los archivos","*.*")))
+        nombrearch=fd.askopenfilename(initialdir = "/",title = "Seleccione archivo",filetypes = (("Archivos CSV","*.csv"),("Todos los archivos","*.*")))
         if nombrearch!='':
             self.contenido=nombrearch
             # archi1=open(nombrearch, "r", encoding="utf-8")
