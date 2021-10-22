@@ -1,5 +1,6 @@
 #Convert csv to list by stackoverflow
 import csv
+from logging import error
 import math
 import copy
 from tkinter.constants import CENTER
@@ -11,6 +12,9 @@ import pygraphviz as pgv
 from pprint import pprint
 from tkinter import IntVar, Radiobutton, ttk
 import tkinter as tk
+from tkinter import scrolledtext as st
+from tkinter import filedialog as fd
+from tkinter import messagebox
 
 class GenerarArbol:
     def __init__(self,path):
@@ -23,7 +27,7 @@ class GenerarArbol:
         self.NodeSheet = ""
         self.NodeParent = {"parent":None,"branch":None}
         self.G=pgv.AGraph(directed=True)
-
+        
         with open(path) as csvfile:
             reader = csv.reader(csvfile) # change contents to floats
             for row in reader: # each row is a list
@@ -306,9 +310,15 @@ class Node:
         return self.child
 
 
+
 class GraphicInterface:
     def __init__(self, master,tk):
+        self.contenido=None
         self.master = master
+        self.agregar_menu()
+        self.scrolledtext1=st.ScrolledText(self.master, width=80, height=20)
+        # self.scrolledtext1.grid(column=0,row=0, padx=10, pady=10)   
+
         self.master.title("TPI Inteligencia Artificial - Grupo 9")
 		# self.master.iconbitmap()
         self.master.resizable(0,0)
@@ -334,58 +344,78 @@ class GraphicInterface:
         self.Integrante4.grid(row=5,column=1,columnspan=3)
         self.botonIniciar.grid(row=6,column=2,padx=0,pady=10)
 
+    def agregar_menu(self):
+        menubar1 = tk.Menu(self.master)
+        self.master.config(menu=menubar1)
+        opciones1 = tk.Menu(menubar1, tearoff=0)
+        opciones1.add_command(label="Abrir archivo", command=self.abrirAr)
+        opciones1.add_separator()
+        menubar1.add_cascade(label="Archivo", menu=opciones1)
+
+    def abrirAr(self):
+        nombrearch=fd.askopenfilename(initialdir = "/",title = "Seleccione archivo",filetypes = (("txt files","*.txt"),("todos los archivos","*.*")))
+        if nombrearch!='':
+            self.contenido=nombrearch
+            # archi1=open(nombrearch, "r", encoding="utf-8")
+            # self.contenido=archi1.read()
+            # archi1.close()
+            # self.scrolledtext1.delete("1.0", tk.END) 
+            # self.scrolledtext1.insert("1.0", self.contenido)
+
+
     def MenuPrincipal(self):
-        self.raiz=tk.Toplevel(self.master)
-        #self.raiz.focus_set()
-        #self.raiz.grab_set()
-        self.raiz.title("TPI Inteligencia Artificial - Grupo 9")
-        self.raiz.resizable(0,0)
-        self.raiz.geometry("1200x690+70+20")
-        self.raiz.config(bg="#9BBCD1")
+        if self.contenido!=None:
+            self.raiz=tk.Toplevel(self.master)
+            #self.raiz.focus_set()
+            #self.raiz.grab_set()
+            self.raiz.title("TPI Inteligencia Artificial - Grupo 9")
+            self.raiz.resizable(0,0)
+            self.raiz.geometry("1200x690+70+20")
+            self.raiz.config(bg="#9BBCD1")
 
-        self.miFrame1=tk.Frame(self.raiz, width=800, height=100,bg="#9BBCD1",relief="groove", borderwidth=5)
-        self.miFrame1.pack(fill="both",side="top")
-        self.miFrame2=tk.Frame(self.raiz, width=800, height=450,bg="#9BBCD1",relief="groove", borderwidth=5)
-        self.miFrame2.pack(fill="both",side="top",expand="YES")
+            self.miFrame1=tk.Frame(self.raiz, width=800, height=100,bg="#9BBCD1",relief="groove", borderwidth=5)
+            self.miFrame1.pack(fill="both",side="top")
+            self.miFrame2=tk.Frame(self.raiz, width=800, height=450,bg="#9BBCD1",relief="groove", borderwidth=5)
+            self.miFrame2.pack(fill="both",side="top",expand="YES")
 
-        self.TituloMenu=tk.Label(self.miFrame1,bg="#9BBCD1", text="Generar Arboles de Decisión - Algoritmo C4.5",fg="#323638",font=("Ubuntu",25), anchor="center")
-        self.TituloMenu.pack(fill="both",side="top")
+            self.TituloMenu=tk.Label(self.miFrame1,bg="#9BBCD1", text="Generar Arboles de Decisión - Algoritmo C4.5",fg="#323638",font=("Ubuntu",25), anchor="center")
+            self.TituloMenu.pack(fill="both",side="top")
+            #Primer arbol
+            Arbol = GenerarArbol(self.contenido)
+            # Arbol = GenerarArbol("./prueba.csv")
+            Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+            # write to a dot file
+            Arbol.G.write('test.dot')
 
-        self.datoTLl=IntVar()
-        self.botonGan=Radiobutton(self.miFrame2,text="GANANCIA",variable=self.datoTLl,value=0,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(0))
-        self.botonTas=Radiobutton(self.miFrame2,text="TASA",variable=self.datoTLl,value=1,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(1))
-        self.botonGan.place(x=220, y=40)
-        self.botonTas.place(x=220, y=60)
+            #create a png file
+            Arbol.G.layout(prog='dot') # use dot
 
-        Arbol = GenerarArbol("./prueba.csv")
-        Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+            Arbol.G.draw('arbol.png')    
 
-        # write to a dot file
-        Arbol.G.write('test.dot')
+            #Segundo arbol
+            Arbol = GenerarArbol(self.contenido)
+            Arbol.TreexGan=False
+            Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+            # write to a dot file
+            Arbol.G.write('test.dot')
+            #create a png file
+            Arbol.G.layout(prog='dot') # use dot
+            Arbol.G.draw('arbol2.png') 
+            self.graficar(0)
 
-        #create a png file
-        Arbol.G.layout(prog='dot') # use dot
+            #Declaracion de RadiusButton para intercalar entre el grafico de Ganancia y Tasa de ganancia
+            self.datoTLl=IntVar()
+            self.botonGan=Radiobutton(self.miFrame2,text="GANANCIA",variable=self.datoTLl,value=0,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(0))
+            self.botonTas=Radiobutton(self.miFrame2,text="TASA DE GANANCIA",variable=self.datoTLl,value=1,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(1))
+            self.botonGan.place(x=220, y=40)
+            self.botonTas.place(x=220, y=60)   
+        else:   
+            messagebox.showerror(message="Debe abrir un archivo .csv para continuar", title="ERROR")
 
-        Arbol.G.draw('arbol.png')  
         
-        Arbol = GenerarArbol("./prueba.csv")
-        Arbol.TreexGan=False
-        Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
-
-        # write to a dot file
-        Arbol.G.write('test.dot')
-
-        #create a png file
-        Arbol.G.layout(prog='dot') # use dot
-
-        Arbol.G.draw('arbol2.png')  
         
-        
-        # canvas.get_tk_widget().grid(row=0,column=0,pady=5)
-
-        self.graficar(0)
-        
-        #toolbar.pack(side="bottom",anchor=W)
+            # Arbol = GenerarArbol("./prueba.csv")
+            
         
 
 
@@ -440,6 +470,6 @@ class GraphicInterface:
 
 if __name__ == "__main__":
     raizMaster = tk.Tk()
-    Programa = GraphicInterface(raizMaster,tk)
+    Programa =  GraphicInterface(raizMaster,tk)
     raizMaster.mainloop()
     
