@@ -15,6 +15,7 @@ import tkinter as tk
 from tkinter import scrolledtext as st
 from tkinter import filedialog as fd
 from tkinter import messagebox
+from tkinter import ttk
 
 class GenerarArbol:
     def __init__(self,path):
@@ -283,53 +284,35 @@ class GenerarArbol:
         print("\nArbol: ",Tree[0])
         print("\n Los atributos identificados son: ",Atributes,len(Atributes))
 
-
-
-class Node:
-
-    def __init__(self, name, parent):
-        self.name = name
-        self.parent = parent
-        self.child = {}
-
-        # Métodos para asignar nodos
-
-    # def setName(self,name):
-    #     self.name = name
-
-    def getName(self):
-        return self.name
-
-    def getParent(self):
-        return self.parent
-
-    def setChild(self,child,branch):
-        self.child[branch] = child
-
-    def getChild(self):
-        return self.child
-
-
-
 class GraphicInterface:
     def __init__(self, master,tk):
-        self.contenido=None
+        self.contenido=None #Variable que guardará la ruta del archivo a abrir
         self.master = master
         self.agregar_menu()
-        self.scrolledtext1=st.ScrolledText(self.master, width=80, height=20)
+        # self.scrolledtext1=st.ScrolledText(self.master, width=80, height=20)
         # self.scrolledtext1.grid(column=0,row=0, padx=10, pady=10)   
 
         self.master.title("TPI Inteligencia Artificial - Grupo 9")
 		# self.master.iconbitmap()
         self.master.resizable(0,0)
-        self.master.geometry("550x350")
+
+        w=550
+        h=350
+        ws = self.master.winfo_screenwidth()
+        hs = self.master.winfo_screenheight()
+        # calculate position x, y
+        x = (ws/2) - (w/2)    
+        y = (hs/2) - (h/2)
+        self.master.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        
+        # self.master.geometry("550x350")
         self.frameInicio = tk.Frame(self.master, width=400, height=250,bg="#9BBCD1",relief="groove", borderwidth=5)
         self.frameInicio.pack(fill="both",side="top",expand="YES")
 
         self.Titulo=tk.Label(self.frameInicio,bg="#9BBCD1",text="TPI - Inteligencia Artificial - Grupo 9",fg="black",height=2,font=("Ubuntu",22))
 
         self.Integrantes = tk.Label(self.frameInicio,bg="#9BBCD1",text="Integrantes:",fg="black",height=2,font=("Ubuntu",15))
-        self.Integrante1 = tk.Label(self.frameInicio,bg="#9BBCD1",text="Acevedo, Fernando",fg="black",height=1,font=("Ubuntu",10))
+        self.Integrante1 = tk.Label(self.frameInicio,bg="#9BBCD1",text="Acevedo, Fernando Enrique",fg="black",height=1,font=("Ubuntu",10))
         self.Integrante2= tk.Label(self.frameInicio,bg="#9BBCD1",text="Figueroa, Simon",fg="black",height=1,font=("Ubuntu",10))
         self.Integrante3 = tk.Label(self.frameInicio,bg="#9BBCD1",text="Ortiz, Claudia",fg="black",height=1,font=("Ubuntu",10))
         self.Integrante4 = tk.Label(self.frameInicio,bg="#9BBCD1",text="Soto, Juan Cruz",fg="black",height=1,font=("Ubuntu",10))
@@ -348,20 +331,13 @@ class GraphicInterface:
         menubar1 = tk.Menu(self.master)
         self.master.config(menu=menubar1)
         opciones1 = tk.Menu(menubar1, tearoff=0)
-        opciones1.add_command(label="Abrir archivo", command=self.abrirAr)
-        opciones1.add_separator()
-        menubar1.add_cascade(label="Archivo", menu=opciones1)
+        # opciones1.add_command(label="Abrir archivo", command=self.abrirAr)
+        menubar1.add_cascade(label="Abrir Archivo", command=self.abrirAr)
 
     def abrirAr(self):
         nombrearch=fd.askopenfilename(initialdir = "/",title = "Seleccione archivo",filetypes = (("Archivos CSV","*.csv"),("Todos los archivos","*.*")))
         if nombrearch!='':
             self.contenido=nombrearch
-            # archi1=open(nombrearch, "r", encoding="utf-8")
-            # self.contenido=archi1.read()
-            # archi1.close()
-            # self.scrolledtext1.delete("1.0", tk.END) 
-            # self.scrolledtext1.insert("1.0", self.contenido)
-
 
     def MenuPrincipal(self):
         if self.contenido!=None:
@@ -370,7 +346,15 @@ class GraphicInterface:
             #self.raiz.grab_set()
             self.raiz.title("TPI Inteligencia Artificial - Grupo 9")
             self.raiz.resizable(0,0)
-            self.raiz.geometry("1200x690+70+20")
+            w=1280
+            h=710
+            ws = self.master.winfo_screenwidth()
+            hs = self.master.winfo_screenheight()
+            # calculate position x, y
+            x = (ws/2) - (w/2)    
+            y = (hs/2) - (h/2)
+            self.raiz.geometry('%dx%d+%d+%d' % (w, h, x, y))
+            # self.raiz.geometry("1200x690+70+20")
             self.raiz.config(bg="#9BBCD1")
 
             self.miFrame1=tk.Frame(self.raiz, width=800, height=100,bg="#9BBCD1",relief="groove", borderwidth=5)
@@ -450,7 +434,7 @@ class GraphicInterface:
             self.canvas = FigureCanvasTkAgg(self.fig, master=self.raiz)  # A tk.DrawingArea.
             self.canvas.draw()
             self.toolbar = NavigationToolbar2Tk(self.canvas, self.raiz)
-            self.canvas.get_tk_widget().place(x=-180,y=150)
+            self.canvas.get_tk_widget().place(relx=0.5, rely=0.6, anchor=CENTER)
         else:
             image2 = Image.open('arbol2.png')
             self.fig2 = Figure(figsize=(28,10), dpi=53)
@@ -464,9 +448,9 @@ class GraphicInterface:
             self.canvas2 = FigureCanvasTkAgg(self.fig2, master=self.raiz)  # A tk.DrawingArea.
             self.canvas2.draw()
             self.toolbar = NavigationToolbar2Tk(self.canvas2, self.raiz)
-            self.canvas2.get_tk_widget().place(x=-180,y=150)
+            self.canvas2.get_tk_widget().place(relx=0.5, rely=0.6, anchor=CENTER)
         self.toolbar.update()
-        self.toolbar.place(x=3,y=634)
+        self.toolbar.place(x=3,y=675)
 
 if __name__ == "__main__":
     raizMaster = tk.Tk()
