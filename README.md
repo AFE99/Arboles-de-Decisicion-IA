@@ -2,7 +2,9 @@
 HOW TO INSTALL AND USE
 
 1- Download and install --> https://graphviz.org/download/
-
+    
+    //In the process of install, check the box to add Graphviz to the system Path
+    
 2- Search and Download "PyGraphviz 1.3.1" --> https://www.lfd.uci.edu/~gohlke/pythonlibs/#pygraphviz
 
 3- Install the last file downloaded, open the console in the folder where is the file and put in--> "pip install --upgrade 'fileName'" . For example: "pip install --upgrade pygraphviz-1.7-cp38-cp38-win_amd64.whl"
