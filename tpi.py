@@ -2,13 +2,14 @@
 import csv
 import math
 import copy
+from tkinter.constants import CENTER
 from PIL import Image
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
 import pygraphviz as pgv
 from pprint import pprint
-from tkinter import ttk
+from tkinter import IntVar, Radiobutton, ttk
 import tkinter as tk
 
 class GenerarArbol:
@@ -322,7 +323,8 @@ class GraphicInterface:
         self.Integrante2= tk.Label(self.frameInicio,bg="#9BBCD1",text="Figueroa, Simon",fg="black",height=1,font=("Ubuntu",10))
         self.Integrante3 = tk.Label(self.frameInicio,bg="#9BBCD1",text="Ortiz, Claudia",fg="black",height=1,font=("Ubuntu",10))
         self.Integrante4 = tk.Label(self.frameInicio,bg="#9BBCD1",text="Soto, Juan Cruz",fg="black",height=1,font=("Ubuntu",10))
-        self.botonIniciar=tk.Button(self.frameInicio, text="Iniciar",bg="#2D373D",fg="#42D5FF",width=10,height=0,command=lambda:self.MenuPrincipal())
+        self.botonIniciar=tk.Button(self.frameInicio, text="Iniciar",bg="#2D373D",fg="#42D5FF",width=20,height=0,command=lambda:self.MenuPrincipal())
+        
 
         self.Titulo.grid(row=0,column=0,columnspan=5,padx=20,pady=10)
         self.Integrantes.grid(row=1,column=1,columnspan=3)
@@ -330,7 +332,7 @@ class GraphicInterface:
         self.Integrante2.grid(row=3,column=1,columnspan=3)
         self.Integrante3.grid(row=4,column=1,columnspan=3)
         self.Integrante4.grid(row=5,column=1,columnspan=3)
-        self.botonIniciar.grid(row=6,column=2,padx=20,pady=20)
+        self.botonIniciar.grid(row=6,column=2,padx=0,pady=10)
 
     def MenuPrincipal(self):
         self.raiz=tk.Toplevel(self.master)
@@ -346,8 +348,14 @@ class GraphicInterface:
         self.miFrame2=tk.Frame(self.raiz, width=800, height=450,bg="#9BBCD1",relief="groove", borderwidth=5)
         self.miFrame2.pack(fill="both",side="top",expand="YES")
 
-        self.TituloMenu=tk.Label(self.miFrame1,bg="#9BBCD1", text="Generar Arboles de Decisión - Algoritmo C4.5",fg="#323638",font=("Ubuntu",25))
+        self.TituloMenu=tk.Label(self.miFrame1,bg="#9BBCD1", text="Generar Arboles de Decisión - Algoritmo C4.5",fg="#323638",font=("Ubuntu",25), anchor="center")
         self.TituloMenu.pack(fill="both",side="top")
+
+        self.datoTLl=IntVar()
+        self.botonGan=Radiobutton(self.miFrame2,text="GANANCIA",variable=self.datoTLl,value=0,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(0))
+        self.botonTas=Radiobutton(self.miFrame2,text="TASA",variable=self.datoTLl,value=1,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(1))
+        self.botonGan.place(x=220, y=40)
+        self.botonTas.place(x=220, y=60)
 
         Arbol = GenerarArbol("./prueba.csv")
         Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
@@ -371,47 +379,24 @@ class GraphicInterface:
         Arbol.G.layout(prog='dot') # use dot
 
         Arbol.G.draw('arbol2.png')  
+        
+        
+        # canvas.get_tk_widget().grid(row=0,column=0,pady=5)
 
-        image = Image.open('arbol.png')
-        self.fig = Figure(figsize=(28, 10), dpi=53)
-        self.ax = self.fig.add_subplot(111)
-        self.ax.text(0.0,-5.0,"Arbol de Decisión segun Ganancia", fontsize=15)
-        self.ax.axis('off')
-        # self.fig.axis('off')
-        self.ax.imshow(image)
-        # self.ax.axis([0,500,0,500])
-        #self.fig.add_subplot(111).plot([], [], marker = 'o')
-        self.fig.set_facecolor('#9BBCD1')
-
-        # image2 = Image.open('arbol2.png')
-        # self.fig2 = Figure(figsize=(11,9), dpi=60)
-        # self.ax2 = self.fig2.gca(projection='polar')
-        # self.ax2.text(0.0,-5.0,"Arbol de Decisión segun Tasa Ganancia", fontsize=15)
-        # self.ax2.axis('off')
-        # # self.fig.axis('off')
-        # self.ax2.imshow(image2)
-        # #self.fig2.add_subplot(111).plot([], [], marker = 'o')
-        # self.fig2.set_facecolor('#9BBCD1')
-
-        self.canvas = FigureCanvasTkAgg(self.fig, master=self.raiz)  # A tk.DrawingArea.
-        self.canvas.draw()
-        #canvas.get_tk_widget().grid(row=0,column=0,pady=5)
-
-        self.toolbar = NavigationToolbar2Tk(self.canvas, self.raiz)
-        self.toolbar.update()
+        self.graficar(0)
+        
         #toolbar.pack(side="bottom",anchor=W)
-        self.canvas.get_tk_widget().place(x=-180,y=150)
+        
 
 
-        # self.canvas2 = FigureCanvasTkAgg(self.fig2, master=self.raiz)  # A tk.DrawingArea.
-        # self.canvas2.draw()
+       
         # #canvas.get_tk_widget().grid(row=0,column=0,pady=5)
 
         # self.toolbar2 = NavigationToolbar2Tk(self.canvas2, self.raiz)
         # self.toolbar2.update()
         #toolbar2.pack(side="bottom",anchor=W)
         # self.canvas2.get_tk_widget().place(x=530,y=150)
-        self.toolbar.place(x=3,y=634)
+       
         # self.toolbar2.place(x=612,y=634)
 
         #fig2.add_subplot(111).axis("equal")
@@ -420,7 +405,38 @@ class GraphicInterface:
         # plt.axis('off')
         # plt.imshow(image,aspect="auto")
         # plt.show()
-
+    def graficar(self,opc):
+        if opc==0:
+            image = Image.open('arbol.png')
+            self.fig = Figure(figsize=(28, 10), dpi=53)
+            self.ax = self.fig.add_subplot(111)
+            self.ax.text(0.0,-5.0,"Arbol de Decisión segun Ganancia", fontsize=15)
+            self.ax.axis('off')
+            # self.fig.axis('off')
+            self.ax.imshow(image)
+            # self.ax.axis([0,500,0,500])
+            #self.fig.add_subplot(111).plot([], [], marker = 'o')
+            self.fig.set_facecolor('#9BBCD1')
+            self.canvas = FigureCanvasTkAgg(self.fig, master=self.raiz)  # A tk.DrawingArea.
+            self.canvas.draw()
+            self.toolbar = NavigationToolbar2Tk(self.canvas, self.raiz)
+            self.canvas.get_tk_widget().place(x=-180,y=150)
+        else:
+            image2 = Image.open('arbol2.png')
+            self.fig2 = Figure(figsize=(28,10), dpi=53)
+            self.ax2 = self.fig2.gca()
+            self.ax2.text(0.0,-5.0,"Arbol de Decisión segun Tasa Ganancia", fontsize=15)
+            self.ax2.axis('off')
+            # self.fig.axis('off')
+            self.ax2.imshow(image2)
+            #self.fig2.add_subplot(111).plot([], [], marker = 'o')
+            self.fig2.set_facecolor('#9BBCD1')
+            self.canvas2 = FigureCanvasTkAgg(self.fig2, master=self.raiz)  # A tk.DrawingArea.
+            self.canvas2.draw()
+            self.toolbar = NavigationToolbar2Tk(self.canvas2, self.raiz)
+            self.canvas2.get_tk_widget().place(x=-180,y=150)
+        self.toolbar.update()
+        self.toolbar.place(x=3,y=634)
 
 if __name__ == "__main__":
     raizMaster = tk.Tk()
