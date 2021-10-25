@@ -3,6 +3,7 @@ import csv
 from logging import error
 import math
 import copy
+import os
 from tkinter.constants import CENTER
 from PIL import Image
 from matplotlib.figure import Figure
@@ -10,7 +11,8 @@ from matplotlib.backends.backend_tkagg import (
     FigureCanvasTkAgg, NavigationToolbar2Tk)
 import pygraphviz as pgv
 from pprint import pprint
-from tkinter import IntVar, Radiobutton, ttk
+# from tkinter import IntVar, Radiobutton, ttk
+from tkinter import *
 import tkinter as tk
 from tkinter import scrolledtext as st
 from tkinter import filedialog as fd
@@ -323,9 +325,17 @@ class GraphicInterface:
         menubar1.add_cascade(label="Abrir Archivo", command=self.abrirAr)
 
     def abrirAr(self):
-        nombrearch=fd.askopenfilename(initialdir = "/",title = "Seleccione archivo",filetypes = (("Archivos CSV","*.csv"),("Todos los archivos","*.*")))
+        print("asdas")
+        nombrearch=fd.askopenfilename(initialdir = os.path.abspath(os.getcwd()),title = "Seleccione archivo",filetypes = (("Archivos CSV","*.csv"),("Todos los archivos","*.*")))
         if nombrearch!='':
             self.contenido=nombrearch
+
+    def actualizarFile(self,archivo,opc):
+        fileant = self.contenido
+        self.abrirAr()
+        archivo["text"] = self.contenido
+        if fileant != self.contenido:
+            self.actualizargrafico(opc)
 
     def MenuPrincipal(self):
         if self.contenido!=None:
@@ -356,6 +366,7 @@ class GraphicInterface:
 
             self.TituloMenu=tk.Label(self.miFrame1,bg="#9BBCD1", text="Generar Arboles de Decisión - Algoritmo C4.5",fg="#323638",font=("Ubuntu",25), anchor="center")
             self.TituloMenu.pack(fill="both",side="top")
+
             #Primer arbol
             Arbol = GenerarArbol(self.contenido)
             # Arbol = GenerarArbol("./prueba5.csv")
@@ -378,14 +389,34 @@ class GraphicInterface:
             #create a png file
             Arbol.G.layout(prog='dot') # use dot
             Arbol.G.draw('arbol2.png') 
+
             self.graficar(0)
 
-            #Declaracion de RadiusButton para intercalar entre el grafico de Ganancia y Tasa de ganancia
+            self.click_btn= tk.PhotoImage(file='clip.png')
+
+            #Let us create a label for button event
+
+            #Let us create a dummy button and pass the image
             self.datoTLl=IntVar()
+            self.archivo = tk.Label(self.miFrame2,bg="#9BBCD1",text=self.contenido,fg="green",height=2)
+            self.archivo.place(x=120, y=65)
+            self.button= tk.Button(self.miFrame2, image=self.click_btn,command= lambda:self.actualizarFile(self.archivo,self.datoTLl),borderwidth=3,height = 40, width = 40)
+            self.button.place(x=120, y=10)
+
+            #Declaracion de RadiusButton para intercalar entre el grafico de Ganancia y Tasa de ganancia
             self.botonGan=Radiobutton(self.miFrame2,text="GANANCIA",variable=self.datoTLl,value=0,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(0))
             self.botonTas=Radiobutton(self.miFrame2,text="TASA DE GANANCIA",variable=self.datoTLl,value=1,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(1))
-            self.botonGan.place(x=220, y=40)
-            self.botonTas.place(x=220, y=60)   
+            self.botonGan.place(x=520, y=40)
+            self.botonTas.place(x=520, y=60)   
+
+
+            self.threshold=tk.Label(self.miFrame2,bg="#9BBCD1",text="Ingrese Threshold:",fg="black",height=2)
+            self.datoTH=tk.StringVar()
+            self.entradaTH=tk.Entry(self.miFrame2,textvariable=self.datoTH)
+            # self.entradaTH.bind("<Return>", self.graficar)
+            self.threshold.place(x=820, y=40)
+            self.entradaTH.place(x=950, y=45)
+
         else:   
             messagebox.showerror(message="Debe abrir un archivo .csv para continuar", title="ERROR")
 
@@ -422,15 +453,41 @@ class GraphicInterface:
             else:
                 self.canvas.scan_dragto(event.x, 0, gain=1)
 
-    def graficar(self,opc):
+    def actualizargrafico(self,opc):
+        #Primer arbol
+        Arbol = GenerarArbol(self.contenido)
+        # Arbol = GenerarArbol("./prueba5.csv")
+        Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+        # write to a dot file
+        Arbol.G.write('test.dot')
 
+        #create a png file
+        Arbol.G.layout(prog='dot') # use dot
+
+        Arbol.G.draw('arbol.png')    
+
+        #Segundo arbol
+        Arbol = GenerarArbol(self.contenido)
+        # Arbol = GenerarArbol("./prueba2.csv")
+        Arbol.TreexGan=False
+        Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+        # write to a dot file
+        Arbol.G.write('test.dot')
+        #create a png file
+        Arbol.G.layout(prog='dot') # use dot
+        Arbol.G.draw('arbol2.png') 
+
+        self.graficar(opc)
+
+    def graficar(self,opc):
+            
         if opc==0:
-            self.img = cv2.imread('Arbol.png')
+            self.img = cv2.imread('arbol.png')
             if self.img.shape[1] < 1280:
                 x = (1280 - self.img.shape[1])/2
             else:
                 x = 0
-            self.canvas = tk.Canvas(self.miFrame3,width=1280,height=720)
+            self.canvas = tk.Canvas(self.miFrame3,width=1280,height=720,bg='#9BBCD1')
 
             self.xsb = tk.Scrollbar(self.miFrame3, orient="horizontal", command=self.canvas.xview)
             self.ysb = tk.Scrollbar(self.miFrame3, orient="vertical", command=self.canvas.yview)
@@ -444,25 +501,25 @@ class GraphicInterface:
             self.miFrame3.grid_columnconfigure(0, weight=1)
 
             # Escape / raw string literal
-            one = tk.PhotoImage(file=r'Arbol.png')
+            one = tk.PhotoImage(file=r'arbol.png')
             self.master.one = one  # to prevent the image garbage collected.
             self.canvas.create_image(0,0, image=one, anchor='nw')
             
             self.canvas.bind("<ButtonPress-1>", self.scroll_start)
             self.canvas.bind("<B1-Motion>", self.scroll_move)
         else:
-            self.img = cv2.imread('Arbol2.png')
+            self.img = cv2.imread('arbol2.png')
 
             if self.img.shape[1] < 1280:
                 x = (1280 - self.img.shape[1])/2
             else:
                 x = 0
-            self.canvas = tk.Canvas(self.miFrame3,width=1280,height=720)
+            self.canvas = tk.Canvas(self.miFrame3,width=1280,height=720,bg='#9BBCD1')
 
             self.xsb = tk.Scrollbar(self.miFrame3, orient="horizontal", command=self.canvas.xview)
             self.ysb = tk.Scrollbar(self.miFrame3, orient="vertical", command=self.canvas.yview)
             self.canvas.configure(yscrollcommand=self.ysb.set, xscrollcommand=self.xsb.set)
-            self.canvas.configure(scrollregion=(x,0,self.img.shape[1],self.img.shape[0]))
+            self.canvas.configure(scrollregion=(-x,0,self.img.shape[1],self.img.shape[0]))
 
             self.xsb.grid(row=1, column=0, sticky="ew")
             self.ysb.grid(row=0, column=1, sticky="ns")
@@ -471,7 +528,7 @@ class GraphicInterface:
             self.miFrame3.grid_columnconfigure(0, weight=1)
 
             # Escape / raw string literal
-            one = tk.PhotoImage(file=r'Arbol2.png')
+            one = tk.PhotoImage(file=r'arbol2.png')
             print(one)
             self.master.one = one  # to prevent the image garbage collected.
             self.canvas.create_image((0,0), image=one, anchor='nw')
