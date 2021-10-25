@@ -34,7 +34,6 @@ class GenerarArbol:
             for row in reader: # each row is a list
                 self.tabla.append(row)
         self.columnas=len(self.tabla[1])-1 #se le resta 1 para no incluir la columna de la clase
-        self.tablaTemp = self.tabla #Tabla temporal donde se almacenara la fraccion de la tabla con la que se esta manejando
 
         self.Atributes = []
 
@@ -45,12 +44,6 @@ class GenerarArbol:
         print("------------------------------------------------TABLA-----------------------------------------------")
         self.prettyPrint(self.tabla)
         print("----------------------------------------------------------------------------------------------------")
-        #Pretty Print de la tabla by stackoverflow
-        # s = [[str(e) for e in row] for row in self.tabla]
-        # lens = [max(map(len, col)) for col in zip(*s)]
-        # fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
-        # self.tablaPrint = [fmt.format(*row) for row in s]
-        # print('\n'.join(self.tablaPrint))
 
     def prettyPrint(self,table):
         s = [[str(e) for e in row] for row in table]
@@ -145,7 +138,7 @@ class GenerarArbol:
                 ganancia = ganAux
                 NodoG=e
 
-            for Dj in entropysAtr[e]["Djs"]:
+            for Dj in entropysAtr[e]["Djs"]: #Calcula la tasa de ganancia para el atributo "e" del ciclo for
                 tasaAux+=-Dj/(len(Tabla)-1) * math.log(Dj/(len(Tabla)-1), 2)
             # print(ganAux,tasaAux,"pri")
             tasaAux=ganAux/tasaAux
@@ -226,7 +219,7 @@ class GenerarArbol:
             #     print(x.getChild())
             #     print(x.getParent())
         else:
-            pg= self.calcEntropy(self.varConjD(Tabla))
+            pg= self.calcEntropy(self.varConjD(Tabla)) #Se almacena la entropia del conjunto D
 
             EntropysAtr = self.calcEntropyAtr(Tabla,Atributes)
             # print(EntropysAtr)
@@ -248,12 +241,6 @@ class GenerarArbol:
                     self.G.add_edge(NodeParent["parent"],"Nodo%i"%len(Tree[0]), color='black',label=NodeParent["branch"])
 
                     NodeParent["parent"] = "Nodo%i"%len(Tree[0])
-                # if NodeParent["parent"]!= None:
-                #     print(NodeParent["branch"])
-                #     print(NodeParent["parent"].getChild())
-                #     NodeParent["parent"].setChild(Tree[0][len(Tree[0])-1],NodeParent["branch"])
-                # NodeParent["parent"] = Tree[0][len(Tree[0])-1]
-                # print(NodeParent["parent"].getChild())
 
                 #print(self.tabla)
                 Dpartition = []
@@ -378,6 +365,7 @@ class GraphicInterface:
 
             #Segundo arbol
             Arbol = GenerarArbol(self.contenido)
+            #Arbol = GenerarArbol("./prueba.csv")
             Arbol.TreexGan=False
             Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
             # write to a dot file
