@@ -16,6 +16,7 @@ from tkinter import scrolledtext as st
 from tkinter import filedialog as fd
 from tkinter import messagebox
 from tkinter import ttk
+import cv2
 
 class GenerarArbol:
     def __init__(self,path):
@@ -345,9 +346,9 @@ class GraphicInterface:
             #self.raiz.focus_set()
             #self.raiz.grab_set()
             self.raiz.title("TPI Inteligencia Artificial - Grupo 9")
-            self.raiz.resizable(0,0)
+            #self.raiz.resizable(0,0)
             w=1280
-            h=710
+            h=670
             ws = self.master.winfo_screenwidth()
             hs = self.master.winfo_screenheight()
             # calculate position x, y
@@ -359,14 +360,18 @@ class GraphicInterface:
 
             self.miFrame1=tk.Frame(self.raiz, width=800, height=100,bg="#9BBCD1",relief="groove", borderwidth=5)
             self.miFrame1.pack(fill="both",side="top")
-            self.miFrame2=tk.Frame(self.raiz, width=800, height=450,bg="#9BBCD1",relief="groove", borderwidth=5)
+            self.miFrame4=tk.Frame(self.raiz, width=800, height=600,bg="#9BBCD1",relief="groove", borderwidth=5)
+            self.miFrame4.pack(fill="both",side="top",expand="YES")
+            self.miFrame2=tk.Frame(self.miFrame4, width=800, height=100,bg="#9BBCD1")
             self.miFrame2.pack(fill="both",side="top",expand="YES")
+            self.miFrame3=tk.Frame(self.miFrame4, width=800, height=410,bg="#9BBCD1")
+            self.miFrame3.pack(fill="both",side="top",expand="YES")
 
             self.TituloMenu=tk.Label(self.miFrame1,bg="#9BBCD1", text="Generar Arboles de Decisión - Algoritmo C4.5",fg="#323638",font=("Ubuntu",25), anchor="center")
             self.TituloMenu.pack(fill="both",side="top")
             #Primer arbol
             Arbol = GenerarArbol(self.contenido)
-            # Arbol = GenerarArbol("./prueba.csv")
+            # Arbol = GenerarArbol("./prueba5.csv")
             Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
             # write to a dot file
             Arbol.G.write('test.dot')
@@ -378,6 +383,7 @@ class GraphicInterface:
 
             #Segundo arbol
             Arbol = GenerarArbol(self.contenido)
+            # Arbol = GenerarArbol("./prueba2.csv")
             Arbol.TreexGan=False
             Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
             # write to a dot file
@@ -419,38 +425,103 @@ class GraphicInterface:
         # plt.axis('off')
         # plt.imshow(image,aspect="auto")
         # plt.show()
+    def scroll_start(self, event):
+        self.canvas.scan_mark(event.x, event.y)
+
+    def scroll_move(self, event):
+        if self.img.shape[1]>1280:
+            if self.img.shape[0]>670:
+                self.canvas.scan_dragto(event.x, event.y, gain=1)
+            else:
+                self.canvas.scan_dragto(event.x, 0, gain=1)
+
     def graficar(self,opc):
+
         if opc==0:
-            image = Image.open('arbol.png')
-            self.fig = Figure(figsize=(28, 10), dpi=53)
-            self.ax = self.fig.add_subplot(111)
-            self.ax.text(0.0,-5.0,"Arbol de Decisión segun Ganancia", fontsize=15)
-            self.ax.axis('off')
-            # self.fig.axis('off')
-            self.ax.imshow(image)
-            # self.ax.axis([0,500,0,500])
-            #self.fig.add_subplot(111).plot([], [], marker = 'o')
-            self.fig.set_facecolor('#9BBCD1')
-            self.canvas = FigureCanvasTkAgg(self.fig, master=self.raiz)  # A tk.DrawingArea.
-            self.canvas.draw()
-            self.toolbar = NavigationToolbar2Tk(self.canvas, self.raiz)
-            self.canvas.get_tk_widget().place(relx=0.5, rely=0.6, anchor=CENTER)
+            self.img = cv2.imread('Arbol.png')
+            if self.img.shape[1] < 1280:
+                x = (1280 - self.img.shape[1])/2
+            else:
+                x = 0
+            self.canvas = tk.Canvas(self.miFrame3,width=1280,height=720)
+
+            self.xsb = tk.Scrollbar(self.miFrame3, orient="horizontal", command=self.canvas.xview)
+            self.ysb = tk.Scrollbar(self.miFrame3, orient="vertical", command=self.canvas.yview)
+            self.canvas.configure(yscrollcommand=self.ysb.set, xscrollcommand=self.xsb.set)
+            self.canvas.configure(scrollregion=(-x,0,self.img.shape[1],self.img.shape[0]))
+
+            self.xsb.grid(row=1, column=0, sticky="ew")
+            self.ysb.grid(row=0, column=1, sticky="ns")
+            self.canvas.grid(row=0, column=0, sticky="ne")
+            self.miFrame3.grid_rowconfigure(0, weight=1)
+            self.miFrame3.grid_columnconfigure(0, weight=1)
+
+            # Escape / raw string literal
+            one = tk.PhotoImage(file=r'Arbol.png')
+            self.master.one = one  # to prevent the image garbage collected.
+            self.canvas.create_image(0,0, image=one, anchor='nw')
+            
+            self.canvas.bind("<ButtonPress-1>", self.scroll_start)
+            self.canvas.bind("<B1-Motion>", self.scroll_move)
         else:
-            image2 = Image.open('arbol2.png')
-            self.fig2 = Figure(figsize=(28,10), dpi=53)
-            self.ax2 = self.fig2.gca()
-            self.ax2.text(0.0,-5.0,"Arbol de Decisión segun Tasa Ganancia", fontsize=15)
-            self.ax2.axis('off')
-            # self.fig.axis('off')
-            self.ax2.imshow(image2)
-            #self.fig2.add_subplot(111).plot([], [], marker = 'o')
-            self.fig2.set_facecolor('#9BBCD1')
-            self.canvas2 = FigureCanvasTkAgg(self.fig2, master=self.raiz)  # A tk.DrawingArea.
-            self.canvas2.draw()
-            self.toolbar = NavigationToolbar2Tk(self.canvas2, self.raiz)
-            self.canvas2.get_tk_widget().place(relx=0.5, rely=0.6, anchor=CENTER)
-        self.toolbar.update()
-        self.toolbar.place(x=3,y=675)
+            self.img = cv2.imread('Arbol2.png')
+
+            if self.img.shape[1] < 1280:
+                x = (1280 - self.img.shape[1])/2
+            else:
+                x = 0
+            self.canvas = tk.Canvas(self.miFrame3,width=1280,height=720)
+
+            self.xsb = tk.Scrollbar(self.miFrame3, orient="horizontal", command=self.canvas.xview)
+            self.ysb = tk.Scrollbar(self.miFrame3, orient="vertical", command=self.canvas.yview)
+            self.canvas.configure(yscrollcommand=self.ysb.set, xscrollcommand=self.xsb.set)
+            self.canvas.configure(scrollregion=(x,0,self.img.shape[1],self.img.shape[0]))
+
+            self.xsb.grid(row=1, column=0, sticky="ew")
+            self.ysb.grid(row=0, column=1, sticky="ns")
+            self.canvas.grid(row=0, column=0, sticky="n")
+            self.miFrame3.grid_rowconfigure(0, weight=1)
+            self.miFrame3.grid_columnconfigure(0, weight=1)
+
+            # Escape / raw string literal
+            one = tk.PhotoImage(file=r'Arbol2.png')
+            print(one)
+            self.master.one = one  # to prevent the image garbage collected.
+            self.canvas.create_image((0,0), image=one, anchor='nw')
+            
+            self.canvas.bind("<ButtonPress-1>", self.scroll_start)
+            self.canvas.bind("<B1-Motion>", self.scroll_move)
+        # if opc==0:
+        #     image = Image.open('arbol.png')
+        #     self.fig = Figure(figsize=(28, 10), dpi=53)
+        #     self.ax = self.fig.add_subplot(111)
+        #     self.ax.text(0.0,-5.0,"Arbol de Decisión segun Ganancia", fontsize=15)
+        #     self.ax.axis('off')
+        #     # self.fig.axis('off')
+        #     self.ax.imshow(image)
+        #     # self.ax.axis([0,500,0,500])
+        #     #self.fig.add_subplot(111).plot([], [], marker = 'o')
+        #     self.fig.set_facecolor('#9BBCD1')
+        #     self.canvas = FigureCanvasTkAgg(self.fig, master=self.raiz)  # A tk.DrawingArea.
+        #     self.canvas.draw()
+        #     self.toolbar = NavigationToolbar2Tk(self.canvas, self.raiz)
+        #     self.canvas.get_tk_widget().place(relx=0.5, rely=0.6, anchor=CENTER)
+        # else:
+        #     image2 = Image.open('arbol2.png')
+        #     self.fig2 = Figure(figsize=(28,10), dpi=53)
+        #     self.ax2 = self.fig2.gca()
+        #     self.ax2.text(0.0,-5.0,"Arbol de Decisión segun Tasa Ganancia", fontsize=15)
+        #     self.ax2.axis('off')
+        #     # self.fig.axis('off')
+        #     self.ax2.imshow(image2)
+        #     #self.fig2.add_subplot(111).plot([], [], marker = 'o')
+        #     self.fig2.set_facecolor('#9BBCD1')
+        #     self.canvas2 = FigureCanvasTkAgg(self.fig2, master=self.raiz)  # A tk.DrawingArea.
+        #     self.canvas2.draw()
+        #     self.toolbar = NavigationToolbar2Tk(self.canvas2, self.raiz)
+        #     self.canvas2.get_tk_widget().place(relx=0.5, rely=0.6, anchor=CENTER)
+        # self.toolbar.update()
+        # self.toolbar.place(x=3,y=675)
 
 if __name__ == "__main__":
     raizMaster = tk.Tk()
