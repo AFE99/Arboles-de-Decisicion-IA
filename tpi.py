@@ -29,6 +29,7 @@ class GenerarArbol:
         self.entropysAtr = {}
         self.Tree = []
         self.NodeSheet = ""
+        self.threshold = 0.2
         self.NodeParent = {"parent":None,"branch":None}
         self.G=pgv.AGraph(directed=True)
         
@@ -130,22 +131,24 @@ class GenerarArbol:
         return entropysAtr
 
     # Funcion que calcula quien seria el siguiente nodo segun la ganancia y/o tasa de ganancia
-    def mejorGananciayTasa(self,pg,entropysAtr,Tabla):
+    def mejorGananciayTasa(self,p0,entropysAtr,Tabla):
         ganancia= 0
         Tasaganancia= 0
         tasaAux=0
 
         for e in entropysAtr:
-            ganAux= pg - entropysAtr[e]["entropia"]
+            ganAux= p0 - entropysAtr[e]["entropia"]
             if ganAux > ganancia:
                 ganancia = ganAux
                 NodoG=e
 
             for Dj in entropysAtr[e]["Djs"]: #Calcula la tasa de ganancia para el atributo "e" del ciclo for
+                # print("DJ",e,Dj,(len(Tabla)-1),math.log(Dj/(len(Tabla)-1), 2))
                 tasaAux+=-Dj/(len(Tabla)-1) * math.log(Dj/(len(Tabla)-1), 2)
             # print(ganAux,tasaAux,"pri")
-            tasaAux=ganAux/tasaAux
-
+            if tasaAux != 0 :
+                tasaAux=ganAux/tasaAux
+            # print(tasaAux)
             if tasaAux > Tasaganancia:
                 Tasaganancia = tasaAux
                 NodoTG=e
@@ -222,14 +225,17 @@ class GenerarArbol:
             #     print(x.getChild())
             #     print(x.getParent())
         else:
-            pg= self.calcEntropy(self.varConjD(Tabla)) #Se almacena la entropia del conjunto D
+            p0= self.calcEntropy(self.varConjD(Tabla)) #Se almacena la entropia del conjunto D
 
             EntropysAtr = self.calcEntropyAtr(Tabla,Atributes)
             # print(EntropysAtr)
-            Ag = self.mejorGananciayTasa(pg,EntropysAtr,Tabla)
+            Ag = self.mejorGananciayTasa(p0,EntropysAtr,Tabla)
+            print(p0 - EntropysAtr[Ag]["entropia"],p0 , EntropysAtr[Ag]["entropia"])
 
-            if False:
-                print("threshold section")
+            if p0 - EntropysAtr[Ag]["entropia"] < self.threshold:
+                Tree[0].append(self.ValorMasFreq(Tabla))
+                self.G.add_node("Nodo%i"%len(Tree[0]),label=self.ValorMasFreq(Tabla), color='pink')
+                self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='pink',label=Tree[1]["branch"])
             else:
                 NodeParent = copy.deepcopy(Tree[1])
 
@@ -277,6 +283,7 @@ class GenerarArbol:
 class GraphicInterface:
     def __init__(self, master,tk):
         self.contenido=None #Variable que guardará la ruta del archivo a abrir
+        self.threshold=2.0 #Variable que guardará el valor del TH ingresado, por default comienza en 2.0
         self.master = master
         self.agregar_menu()
         # self.scrolledtext1=st.ScrolledText(self.master, width=80, height=20)
@@ -325,7 +332,6 @@ class GraphicInterface:
         menubar1.add_cascade(label="Abrir Archivo", command=self.abrirAr)
 
     def abrirAr(self):
-        print("asdas")
         nombrearch=fd.askopenfilename(initialdir = os.path.abspath(os.getcwd()),title = "Seleccione archivo",filetypes = (("Archivos CSV","*.csv"),("Todos los archivos","*.*")))
         if nombrearch!='':
             self.contenido=nombrearch
@@ -336,6 +342,18 @@ class GraphicInterface:
         archivo["text"] = self.contenido
         if fileant != self.contenido:
             self.actualizargrafico(opc)
+    
+    def actualizarTh(self,th,opc):
+        print("hola?")
+        try:
+            th = float(th)
+            print(th,type(th),self.threshold,type(self.threshold))
+            if th!=self.threshold:
+                self.threshold = th
+                print("ASD")
+                self.actualizargrafico(opc)
+        except:
+            messagebox.showerror(message="Por favor, ingrese un valor valido", title="ERROR",parent=self.raiz)
 
     def MenuPrincipal(self):
         if self.contenido!=None:
@@ -343,7 +361,7 @@ class GraphicInterface:
             #self.raiz.focus_set()
             #self.raiz.grab_set()
             self.raiz.title("TPI Inteligencia Artificial - Grupo 9")
-            #self.raiz.resizable(0,0)
+            self.raiz.resizable(0,0)
             w=1280
             h=670
             ws = self.master.winfo_screenwidth()
@@ -352,6 +370,7 @@ class GraphicInterface:
             x = (ws/2) - (w/2)    
             y = (hs/2) - (h/2)
             self.raiz.geometry('%dx%d+%d+%d' % (w, h, x, y))
+            # self.raiz.minsize(1280,670)
             # self.raiz.geometry("1200x690+70+20")
             self.raiz.config(bg="#9BBCD1")
 
@@ -397,24 +416,25 @@ class GraphicInterface:
             #Let us create a label for button event
 
             #Let us create a dummy button and pass the image
-            self.datoTLl=IntVar()
+            self.datoGain=IntVar()
             self.archivo = tk.Label(self.miFrame2,bg="#9BBCD1",text=self.contenido,fg="green",height=2)
             self.archivo.place(x=120, y=65)
-            self.button= tk.Button(self.miFrame2, image=self.click_btn,command= lambda:self.actualizarFile(self.archivo,self.datoTLl),borderwidth=3,height = 40, width = 40)
+            self.button= tk.Button(self.miFrame2, image=self.click_btn,command= lambda:self.actualizarFile(self.archivo,self.datoGain.get()),borderwidth=3,height = 40, width = 40)
             self.button.place(x=120, y=10)
 
             #Declaracion de RadiusButton para intercalar entre el grafico de Ganancia y Tasa de ganancia
-            self.botonGan=Radiobutton(self.miFrame2,text="GANANCIA",variable=self.datoTLl,value=0,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(0))
-            self.botonTas=Radiobutton(self.miFrame2,text="TASA DE GANANCIA",variable=self.datoTLl,value=1,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(1))
+            self.botonGan=Radiobutton(self.miFrame2,text="GANANCIA",variable=self.datoGain,value=0,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(0))
+            self.botonTas=Radiobutton(self.miFrame2,text="TASA DE GANANCIA",variable=self.datoGain,value=1,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(1))
             self.botonGan.place(x=520, y=40)
             self.botonTas.place(x=520, y=60)   
 
 
-            self.threshold=tk.Label(self.miFrame2,bg="#9BBCD1",text="Ingrese Threshold:",fg="black",height=2)
+            self.thresholdLabel=tk.Label(self.miFrame2,bg="#9BBCD1",text="Ingrese Threshold:",fg="black",height=2)
             self.datoTH=tk.StringVar()
+            self.datoTH.set(0.2)
             self.entradaTH=tk.Entry(self.miFrame2,textvariable=self.datoTH)
-            # self.entradaTH.bind("<Return>", self.graficar)
-            self.threshold.place(x=820, y=40)
+            self.entradaTH.bind("<Return>", lambda x=None: self.actualizarTh( self.entradaTH.get(),self.datoGain.get() )  )
+            self.thresholdLabel.place(x=820, y=40)
             self.entradaTH.place(x=950, y=45)
 
         else:   
@@ -456,6 +476,7 @@ class GraphicInterface:
     def actualizargrafico(self,opc):
         #Primer arbol
         Arbol = GenerarArbol(self.contenido)
+        Arbol.threshold = self.threshold
         # Arbol = GenerarArbol("./prueba5.csv")
         Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
         # write to a dot file
@@ -468,6 +489,7 @@ class GraphicInterface:
 
         #Segundo arbol
         Arbol = GenerarArbol(self.contenido)
+        Arbol.threshold = self.threshold
         # Arbol = GenerarArbol("./prueba2.csv")
         Arbol.TreexGan=False
         Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
