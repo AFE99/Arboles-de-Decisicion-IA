@@ -145,14 +145,16 @@ class GenerarArbol:
             for Dj in entropysAtr[e]["Djs"]: #Calcula la tasa de ganancia para el atributo "e" del ciclo for
                 # print("DJ",e,Dj,(len(Tabla)-1),math.log(Dj/(len(Tabla)-1), 2))
                 tasaAux+=-Dj/(len(Tabla)-1) * math.log(Dj/(len(Tabla)-1), 2)
-            # print(ganAux,tasaAux,"pri")
+            print(ganAux,tasaAux,"pri")
             if tasaAux != 0 :
-                tasaAux=ganAux/tasaAux
-            # print(tasaAux)
+                tasaAux=round(ganAux/tasaAux,3)
+            
+            print(e,tasaAux,Tasaganancia)
             if tasaAux > Tasaganancia:
                 Tasaganancia = tasaAux
                 NodoTG=e
             # print(tasaAux,"seg")
+            tasaAux=0
         print("-----------------------------------------------------------------------------------------------------")
         print("Nodo Raiz según Ganancia: " ,NodoG, "\nNodo Raiz según Tasa Ganancia: ",NodoTG)
         print("*****************************************************************************************************")
@@ -487,6 +489,7 @@ class GraphicInterface:
 
         Arbol.G.draw('arbol.png')    
 
+        print("SEGUNDOOOOOOOO")
         #Segundo arbol
         Arbol = GenerarArbol(self.contenido)
         Arbol.threshold = self.threshold
