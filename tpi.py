@@ -29,7 +29,7 @@ class GenerarArbol:
         self.entropysAtr = {}
         self.Tree = []
         self.NodeSheet = ""
-        self.threshold = 0.2
+        self.threshold = 0
         self.NodeParent = {"parent":None,"branch":None}
         self.G=pgv.AGraph(directed=True)
         
@@ -433,7 +433,7 @@ class GraphicInterface:
 
             self.thresholdLabel=tk.Label(self.miFrame2,bg="#9BBCD1",text="Ingrese Threshold:",fg="black",height=2)
             self.datoTH=tk.StringVar()
-            self.datoTH.set(0.2)
+            self.datoTH.set(0)
             self.entradaTH=tk.Entry(self.miFrame2,textvariable=self.datoTH)
             self.entradaTH.bind("<Return>", lambda x=None: self.actualizarTh( self.entradaTH.get(),self.datoGain.get() )  )
             self.thresholdLabel.place(x=820, y=40)
