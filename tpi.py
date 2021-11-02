@@ -33,10 +33,13 @@ class GenerarArbol:
         self.NodeParent = {"parent":None,"branch":None}
         self.G=pgv.AGraph(directed=True)
         
-        with open(path) as csvfile:
-            reader = csv.reader(csvfile) # change contents to floats
-            for row in reader: # each row is a list
-                self.tabla.append(row)
+        try:
+            with open(path) as csvfile:
+                reader = csv.reader(csvfile) # change contents to floats
+                for row in reader: # each row is a list
+                    self.tabla.append(row)
+        except:
+            messagebox.showwarning(message="Por favor, ingrese un archivo correcto", title="Error de formato")
         self.columnas=len(self.tabla[1])-1 #se le resta 1 para no incluir la columna de la clase
 
         self.Atributes = []
@@ -227,6 +230,8 @@ class GenerarArbol:
             #     print(x.getChild())
             #     print(x.getParent())
         else:
+            NodeParent = copy.deepcopy(Tree[1])
+
             p0= self.calcEntropy(self.varConjD(Tabla)) #Se almacena la entropia del conjunto D
 
             EntropysAtr = self.calcEntropyAtr(Tabla,Atributes)
@@ -234,12 +239,11 @@ class GenerarArbol:
             Ag = self.mejorGananciayTasa(p0,EntropysAtr,Tabla)
             print(p0 - EntropysAtr[Ag]["entropia"],p0 , EntropysAtr[Ag]["entropia"])
 
-            if p0 - EntropysAtr[Ag]["entropia"] < self.threshold:
+            if p0 - EntropysAtr[Ag]["entropia"] < self.threshold and NodeParent["parent"] != None:
                 Tree[0].append(self.ValorMasFreq(Tabla))
                 self.G.add_node("Nodo%i"%len(Tree[0]),label=self.ValorMasFreq(Tabla), color='pink')
                 self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='pink',label=Tree[1]["branch"])
             else:
-                NodeParent = copy.deepcopy(Tree[1])
 
                 #Tree[0].append(Node(Ag,NodeParent["parent"]))
                 Tree[0].append(Ag)
@@ -357,9 +361,16 @@ class GraphicInterface:
         except:
             messagebox.showerror(message="Por favor, ingrese un valor valido", title="ERROR",parent=self.raiz)
 
+    def Cerrar(self):
+        self.botonIniciar["state"]="normal"
+        self.raiz.destroy()
+
     def MenuPrincipal(self):
         if self.contenido!=None:
+            self.botonIniciar["state"]="disabled"
+
             self.raiz=tk.Toplevel(self.master)
+            self.raiz.protocol("WM_DELETE_WINDOW", self.Cerrar)
             #self.raiz.focus_set()
             #self.raiz.grab_set()
             self.raiz.title("TPI Inteligencia Artificial - Grupo 9")
