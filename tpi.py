@@ -46,11 +46,10 @@ class GenerarArbol:
 
         for x in range(1,len(self.tabla[1])-1):
             self.Atributes.append(self.tabla[0][x])
-        # print("Atributos: ",self.Atributes)
 
-        print("------------------------------------------------TABLA-----------------------------------------------")
-        self.prettyPrint(self.tabla)
-        print("----------------------------------------------------------------------------------------------------")
+        # print("------------------------------------------------TABLA-----------------------------------------------")
+        # self.prettyPrint(self.tabla)
+        # print("----------------------------------------------------------------------------------------------------")
 
     def prettyPrint(self,table):
         s = [[str(e) for e in row] for row in table]
@@ -72,8 +71,6 @@ class GenerarArbol:
             else:
                 list.append(Tabla[i][len(Tabla[1])-1]) #Resguardo variable del conjunto D agregandola en una posicion de la lista "list"
                 cont.append(1) #Agrego una posicion a la lista "cont" inicializada en 1, por la aparición de la variable
-        # print(list)
-        # print(cont)
         return cont
 
     def form(self,a,b):
@@ -87,21 +84,18 @@ class GenerarArbol:
         tot = sum(listCant) #Calculo el total
         for i in range(len(listCant)):
             entropyD=entropyD+ self.form(listCant[i],tot)
-        print("\n La entropia del conjunto D es: "+str(entropyD))
+        # print("\n La entropia del conjunto D es: "+str(entropyD))
         return(entropyD)
 
     def calcEntropyAtr(self,Tabla,Atributes):
-        #Diccionario donde se cargaran las entropias de cada Atributo
-        # self.Atributes.remove("Colesterol")
-        # self.Atributes.remove("Edad")
         columnas=len(Tabla[1])-1
-        entropysAtr = {}
+        entropysAtr = {} #Diccionario donde se cargaran las entropias de cada Atributo
         # print(Atributes)
-        print("-----------------------------------------------------------------------------------------------------")
-        print("VALORES: ")
+        # print("-----------------------------------------------------------------------------------------------------")
+        # print("VALORES: ")
         for x in range(len(Atributes)): #Recorreremos la tabla por columnas para trabajar con cada Atributo por separado, salteamos la primera columna de ID
             Atr = Tabla[0].index(Atributes[x])
-            print("\n",Tabla[0][Atr])
+            # print("\n",Tabla[0][Atr])
             valores = {} #Diccionario donde se cargaran los valores necesarios para calcular la entropia del atributo
             for y in range(1,len(Tabla)): #Para recorrer los valores de la columna del atributo en la que estamos posicionados, salteamos la primera fila que es la cabecera
                 campo = Tabla[y][Atr] #Se toma el valor que toma el atributo en esa fila
@@ -115,9 +109,8 @@ class GenerarArbol:
                     valores[campo]={"cantidad":1}
                     valores[campo][Tabla[y][columnas]]=1
             entropysAtr[Tabla[0][Atr]]={"entropia":0,"Djs":[],"Vars":[]}
-            pprint(valores, width=1)
+            # pprint(valores, width=1)
             for idx in valores:
-                #print(idx,valores)
                 if idx not in  entropysAtr[Tabla[0][Atr]]["Vars"]:
                         entropysAtr[Tabla[0][Atr]]["Vars"].append(idx)
                 cantidad=valores[idx]["cantidad"]
@@ -125,12 +118,11 @@ class GenerarArbol:
 
                 entropysAtr[Tabla[0][Atr]]["Djs"].append(cantidad)
                 for var in valores[idx]:
-                    #print(var,valores[idx],valores[idx][var])
                     entropysAtr[Tabla[0][Atr]]["entropia"]+=cantidad/(len(Tabla)-1) * (-valores[idx][var]/cantidad * math.log(valores[idx][var]/cantidad, 2))
             entropysAtr[Tabla[0][Atr]]["entropia"]=round(entropysAtr[Tabla[0][Atr]]["entropia"], 3)
-        print("-----------------------------------------------------------------------------------------------------")
-        print("Entropia de las variables: ")
-        pprint(entropysAtr, width=1)
+        # print("-----------------------------------------------------------------------------------------------------")
+        # print("Entropia de las variables: ")
+        # pprint(entropysAtr, width=1)
         return entropysAtr
 
     # Funcion que calcula quien seria el siguiente nodo segun la ganancia y/o tasa de ganancia
@@ -146,21 +138,17 @@ class GenerarArbol:
                 NodoG=e
 
             for Dj in entropysAtr[e]["Djs"]: #Calcula la tasa de ganancia para el atributo "e" del ciclo for
-                # print("DJ",e,Dj,(len(Tabla)-1),math.log(Dj/(len(Tabla)-1), 2))
                 tasaAux+=-Dj/(len(Tabla)-1) * math.log(Dj/(len(Tabla)-1), 2)
-            print(ganAux,tasaAux,"pri")
             if tasaAux != 0 :
                 tasaAux=round(ganAux/tasaAux,3)
-            
-            print(e,tasaAux,Tasaganancia)
+
             if tasaAux > Tasaganancia:
                 Tasaganancia = tasaAux
                 NodoTG=e
-            # print(tasaAux,"seg")
             tasaAux=0
-        print("-----------------------------------------------------------------------------------------------------")
-        print("Nodo Raiz según Ganancia: " ,NodoG, "\nNodo Raiz según Tasa Ganancia: ",NodoTG)
-        print("*****************************************************************************************************")
+        # print("-----------------------------------------------------------------------------------------------------")
+        # print("Nodo Raiz según Ganancia: " ,NodoG, "\nNodo Raiz según Tasa Ganancia: ",NodoTG)
+        # print("*****************************************************************************************************")
         
         if self.TreexGan:
             return NodoG
@@ -173,22 +161,18 @@ class GenerarArbol:
         column = Tabla[0].index(Atributo)
 
         for x in range(1,len(Tabla)):
-            #print(contador,rows,Tabla[x][column],Variable)
             if Tabla[x][column] == Variable:
                 tablaTemp2.append(Tabla[x])
 
         return tablaTemp2
 
     def ExamplesSameClass(self,Tabla):
-        # print("TABLA",Tabla)
         rows=len(Tabla)
         columnClass= len(Tabla[0])-1
-        # print(columnClass)
         marca=""
         if rows>1:
             marca=Tabla[1][columnClass]
             for x in range(2,len(Tabla)):
-                # print("MARCA: ",marca,Tabla[x][columnClass])
                 if marca!=Tabla[x][columnClass]:
                     return False
         self.NodeSheet = marca
@@ -216,36 +200,26 @@ class GenerarArbol:
             Tree[0].append(self.NodeSheet)
             self.G.add_node("Nodo%i"%len(Tree[0]),label=self.NodeSheet, color='green')
             self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='black',label=Tree[1]["branch"])
-            # Tree[0].append(Node(self.NodeSheet,Tree[1]["parent"]))
-            # Tree[1].setChild[Tree[0][len(Tree[0])-1],Tree[1]["branch"]]
         elif len(Atributes) == 0:
-            print("No hay mas atributos a analizar, tabla= ", pprint(Tabla, width=1))
-            # print(Tabla)
+            # print("No hay mas atributos a analizar, tabla= ", pprint(Tabla, width=1))
 
             Tree[0].append(self.ValorMasFreq(Tabla))
             self.G.add_node("Nodo%i"%len(Tree[0]),label=self.ValorMasFreq(Tabla), color='green')
             self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='black',label=Tree[1]["branch"])
-            # for x in Tree[0]:
-            #     print(x.getName())
-            #     print(x.getChild())
-            #     print(x.getParent())
         else:
             NodeParent = copy.deepcopy(Tree[1])
 
             p0= self.calcEntropy(self.varConjD(Tabla)) #Se almacena la entropia del conjunto D
 
             EntropysAtr = self.calcEntropyAtr(Tabla,Atributes)
-            # print(EntropysAtr)
+
             Ag = self.mejorGananciayTasa(p0,EntropysAtr,Tabla)
-            print(p0 - EntropysAtr[Ag]["entropia"],p0 , EntropysAtr[Ag]["entropia"])
 
             if p0 - EntropysAtr[Ag]["entropia"] < self.threshold and NodeParent["parent"] != None:
                 Tree[0].append(self.ValorMasFreq(Tabla))
                 self.G.add_node("Nodo%i"%len(Tree[0]),label=self.ValorMasFreq(Tabla), color='pink')
                 self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='pink',label=Tree[1]["branch"])
             else:
-
-                #Tree[0].append(Node(Ag,NodeParent["parent"]))
                 Tree[0].append(Ag)
                 
                 if NodeParent["parent"]== None:
@@ -257,17 +231,13 @@ class GenerarArbol:
 
                     NodeParent["parent"] = "Nodo%i"%len(Tree[0])
 
-                #print(self.tabla)
                 Dpartition = []
-                # print(EntropysAtr[Ag]["Vars"])
                 for var in EntropysAtr[Ag]["Vars"]:
                     Dpartition.append(self.ObtenerParticion(Tabla,Ag,var))
-                print("\nDpartition = ")
-                for i in range(len(Dpartition)):
-                    for j in range(len(Dpartition[i])):
-                        print(Dpartition[i][j])
-                # print(Dpartition)
-                # print(Ag,Atributes)
+                # print("\nDpartition = ")
+                # for i in range(len(Dpartition)):
+                #     for j in range(len(Dpartition[i])):
+                #         print(Dpartition[i][j])
 
                 Atributes2 = copy.deepcopy(Atributes)
                 Atributes2.remove(Ag)
@@ -275,16 +245,12 @@ class GenerarArbol:
                 for Dj in range(len(Dpartition)):
                     Tree[0].append(EntropysAtr[Ag]["Vars"][Dj])
                     NodeParent["branch"] = EntropysAtr[Ag]["Vars"][Dj]
-                    # print(NodeParent["branch"])
-                    # input()
-                    # Tree[0][len(Tree[0])-1].setChild(None,EntropysAtr[Ag]["Vars"][Dj])
 
                     Tabla = Dpartition[Dj]
-                    # print("ENTREEE")
                     self.AlgoritmoC45(Tabla,Atributes2,[Tree[0],NodeParent])
 
-        print("\nArbol: ",Tree[0])
-        print("\n Los atributos identificados son: ",Atributes,len(Atributes))
+        # print("\nArbol: ",Tree[0])
+        # print("\n Los atributos identificados son: ",Atributes,len(Atributes))
 
 class GraphicInterface:
     def __init__(self, master,tk):
@@ -334,7 +300,6 @@ class GraphicInterface:
         menubar1 = tk.Menu(self.master)
         self.master.config(menu=menubar1)
         opciones1 = tk.Menu(menubar1, tearoff=0)
-        # opciones1.add_command(label="Abrir archivo", command=self.abrirAr)
         menubar1.add_cascade(label="Abrir Archivo", command=self.abrirAr)
 
     def abrirAr(self):
@@ -350,13 +315,10 @@ class GraphicInterface:
             self.actualizargrafico(opc)
     
     def actualizarTh(self,th,opc):
-        print("hola?")
         try:
             th = float(th)
-            print(th,type(th),self.threshold,type(self.threshold))
             if th!=self.threshold:
                 self.threshold = th
-                print("ASD")
                 self.actualizargrafico(opc)
         except:
             messagebox.showerror(message="Por favor, ingrese un valor valido", title="ERROR",parent=self.raiz)
@@ -401,7 +363,6 @@ class GraphicInterface:
 
             #Primer arbol
             Arbol = GenerarArbol(self.contenido)
-            # Arbol = GenerarArbol("./prueba5.csv")
             Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
             # write to a dot file
             Arbol.G.write('test.dot')
@@ -413,7 +374,6 @@ class GraphicInterface:
 
             #Segundo arbol
             Arbol = GenerarArbol(self.contenido)
-            # Arbol = GenerarArbol("./prueba2.csv")
             Arbol.TreexGan=False
             Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
             # write to a dot file
@@ -453,29 +413,7 @@ class GraphicInterface:
         else:   
             messagebox.showerror(message="Debe abrir un archivo .csv para continuar", title="ERROR")
 
-        
-        
-            # Arbol = GenerarArbol("./prueba.csv")
-            
-        
 
-
-       
-        # #canvas.get_tk_widget().grid(row=0,column=0,pady=5)
-
-        # self.toolbar2 = NavigationToolbar2Tk(self.canvas2, self.raiz)
-        # self.toolbar2.update()
-        #toolbar2.pack(side="bottom",anchor=W)
-        # self.canvas2.get_tk_widget().place(x=530,y=150)
-       
-        # self.toolbar2.place(x=612,y=634)
-
-        #fig2.add_subplot(111).axis("equal")
-        # plt.figure(figsize=(20,15),dpi=40)
-        # image = Image.open('arbol.png')
-        # plt.axis('off')
-        # plt.imshow(image,aspect="auto")
-        # plt.show()
     def scroll_start(self, event):
         self.canvas.scan_mark(event.x, event.y)
 
@@ -500,7 +438,6 @@ class GraphicInterface:
 
         Arbol.G.draw('arbol.png')    
 
-        print("SEGUNDOOOOOOOO")
         #Segundo arbol
         Arbol = GenerarArbol(self.contenido)
         Arbol.threshold = self.threshold
@@ -565,43 +502,11 @@ class GraphicInterface:
 
             # Escape / raw string literal
             one = tk.PhotoImage(file=r'arbol2.png')
-            print(one)
             self.master.one = one  # to prevent the image garbage collected.
             self.canvas.create_image((0,0), image=one, anchor='nw')
             
             self.canvas.bind("<ButtonPress-1>", self.scroll_start)
             self.canvas.bind("<B1-Motion>", self.scroll_move)
-        # if opc==0:
-        #     image = Image.open('arbol.png')
-        #     self.fig = Figure(figsize=(28, 10), dpi=53)
-        #     self.ax = self.fig.add_subplot(111)
-        #     self.ax.text(0.0,-5.0,"Arbol de Decisión segun Ganancia", fontsize=15)
-        #     self.ax.axis('off')
-        #     # self.fig.axis('off')
-        #     self.ax.imshow(image)
-        #     # self.ax.axis([0,500,0,500])
-        #     #self.fig.add_subplot(111).plot([], [], marker = 'o')
-        #     self.fig.set_facecolor('#9BBCD1')
-        #     self.canvas = FigureCanvasTkAgg(self.fig, master=self.raiz)  # A tk.DrawingArea.
-        #     self.canvas.draw()
-        #     self.toolbar = NavigationToolbar2Tk(self.canvas, self.raiz)
-        #     self.canvas.get_tk_widget().place(relx=0.5, rely=0.6, anchor=CENTER)
-        # else:
-        #     image2 = Image.open('arbol2.png')
-        #     self.fig2 = Figure(figsize=(28,10), dpi=53)
-        #     self.ax2 = self.fig2.gca()
-        #     self.ax2.text(0.0,-5.0,"Arbol de Decisión segun Tasa Ganancia", fontsize=15)
-        #     self.ax2.axis('off')
-        #     # self.fig.axis('off')
-        #     self.ax2.imshow(image2)
-        #     #self.fig2.add_subplot(111).plot([], [], marker = 'o')
-        #     self.fig2.set_facecolor('#9BBCD1')
-        #     self.canvas2 = FigureCanvasTkAgg(self.fig2, master=self.raiz)  # A tk.DrawingArea.
-        #     self.canvas2.draw()
-        #     self.toolbar = NavigationToolbar2Tk(self.canvas2, self.raiz)
-        #     self.canvas2.get_tk_widget().place(relx=0.5, rely=0.6, anchor=CENTER)
-        # self.toolbar.update()
-        # self.toolbar.place(x=3,y=675)
 
 if __name__ == "__main__":
     raizMaster = tk.Tk()
