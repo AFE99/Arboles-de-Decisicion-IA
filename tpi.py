@@ -249,13 +249,30 @@ class GenerarArbol:
                     Tabla = Dpartition[Dj]
                     self.AlgoritmoC45(Tabla,Atributes2,[Tree[0],NodeParent])
 
-        # print("\nArbol: ",Tree[0])
+        print("\nArbol: ",Tree[0])
         # print("\n Los atributos identificados son: ",Atributes,len(Atributes))
+
+class Node:
+    def __init__(self, name, parent):
+        self.name = name
+        self.parent = parent
+        self.child = {}
+        # Métodos para asignar nodos
+    # def setName(self,name):
+    #     self.name = name
+    def getName(self):
+        return self.name
+    def getParent(self):
+        return self.parent
+    def setChild(self,child,branch):
+        self.child[branch] = child
+    def getChild(self):
+        return self.child
 
 class GraphicInterface:
     def __init__(self, master,tk):
         self.contenido=None #Variable que guardará la ruta del archivo a abrir
-        self.threshold=2.0 #Variable que guardará el valor del TH ingresado, por default comienza en 2.0
+        self.threshold=0 #Variable que guardará el valor del TH ingresado, por default comienza en 0
         self.master = master
         self.agregar_menu()
         # self.scrolledtext1=st.ScrolledText(self.master, width=80, height=20)
@@ -306,11 +323,12 @@ class GraphicInterface:
         nombrearch=fd.askopenfilename(initialdir = os.path.abspath(os.getcwd()),title = "Seleccione archivo",filetypes = (("Archivos CSV","*.csv"),("Todos los archivos","*.*")))
         if nombrearch!='':
             self.contenido=nombrearch
+            
 
     def actualizarFile(self,archivo,opc):
         fileant = self.contenido
         self.abrirAr()
-        archivo["text"] = self.contenido
+        datoFile.set(self.contenido)
         if fileant != self.contenido:
             self.actualizargrafico(opc)
     
@@ -334,7 +352,7 @@ class GraphicInterface:
             self.raiz=tk.Toplevel(self.master)
             self.raiz.protocol("WM_DELETE_WINDOW", self.Cerrar)
             #self.raiz.focus_set()
-            #self.raiz.grab_set()
+            self.raiz.grab_set()
             self.raiz.title("TPI Inteligencia Artificial - Grupo 9")
             self.raiz.resizable(0,0)
             w=1280
@@ -390,16 +408,18 @@ class GraphicInterface:
 
             #Let us create a dummy button and pass the image
             self.datoGain=IntVar()
-            self.archivo = tk.Label(self.miFrame2,bg="#9BBCD1",text=self.contenido,fg="green",height=2)
-            self.archivo.place(x=120, y=65)
-            self.button= tk.Button(self.miFrame2, image=self.click_btn,command= lambda:self.actualizarFile(self.archivo,self.datoGain.get()),borderwidth=3,height = 40, width = 40)
-            self.button.place(x=120, y=10)
+            self.datoFile=tk.StringVar()
+            self.datoFile.set(self.contenido)
+            self.archivo = tk.Entry(self.miFrame2,textvariable=self.datoFile,bg="#9BBCD1",fg="green",state="readonly",width=60)
+            self.archivo.place(x=50, y=65)
+            self.button= tk.Button(self.miFrame2, image=self.click_btn,command= lambda:self.actualizarFile(self.datoFile,self.datoGain.get()),borderwidth=3,height = 40, width = 40)
+            self.button.place(x=50, y=10)
 
             #Declaracion de RadiusButton para intercalar entre el grafico de Ganancia y Tasa de ganancia
             self.botonGan=Radiobutton(self.miFrame2,text="GANANCIA",variable=self.datoGain,value=0,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(0))
             self.botonTas=Radiobutton(self.miFrame2,text="TASA DE GANANCIA",variable=self.datoGain,value=1,bg="#9BBCD1",fg="black",pady=0,command=lambda:self.graficar(1))
-            self.botonGan.place(x=520, y=40)
-            self.botonTas.place(x=520, y=60)   
+            self.botonGan.place(x=450, y=40)
+            self.botonTas.place(x=450, y=60)   
 
 
             self.thresholdLabel=tk.Label(self.miFrame2,bg="#9BBCD1",text="Ingrese Threshold:",fg="black",height=2)
@@ -407,8 +427,13 @@ class GraphicInterface:
             self.datoTH.set(0)
             self.entradaTH=tk.Entry(self.miFrame2,textvariable=self.datoTH)
             self.entradaTH.bind("<Return>", lambda x=None: self.actualizarTh( self.entradaTH.get(),self.datoGain.get() )  )
-            self.thresholdLabel.place(x=820, y=40)
-            self.entradaTH.place(x=950, y=45)
+            self.thresholdLabel.place(x=650, y=30)
+            self.entradaTH.place(x=650, y=60)
+
+            self.pjelabel=tk.Label(self.miFrame2,bg="#9BBCD1",text="Porcentaje de Entrenamiento:",fg="black",height=2)
+            self.pjelabel.place(x=800,y=50)
+            self.porcentaje = tk.Scale(self.miFrame2, from_=0, to=100, orient=HORIZONTAL,length=250)
+            self.porcentaje.place(x=980,y=40)
 
         else:   
             messagebox.showerror(message="Debe abrir un archivo .csv para continuar", title="ERROR")
