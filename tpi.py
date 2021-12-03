@@ -30,7 +30,7 @@ class GenerarArbol:
         self.Tree = []
         self.NodeSheet = ""
         self.threshold = 0
-        self.NodeParent = {"parent":None,"branch":None}
+        self.NodeParent = {"parent":None,"branch":None,"nodo":None}
         self.G=pgv.AGraph(directed=True)
         
         try:
@@ -197,15 +197,24 @@ class GenerarArbol:
     def AlgoritmoC45(self,Tabla,Atributes,Tree):
 
         if self.ExamplesSameClass(Tabla):
-            Tree[0].append(self.NodeSheet)
+            # Tree[0].append(self.NodeSheet)
+            if Tree[1]["nodo"]==None:
+                Tree[1]["parent"]=Atributes[0]
+                Tree[1]["nodo"]=Node(Atributes[0],None)
+                Tree[1]["branch"]=Tabla[1][1]
             self.G.add_node("Nodo%i"%len(Tree[0]),label=self.NodeSheet, color='green')
             self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='black',label=Tree[1]["branch"])
+            Tree[0].append(Node(self.NodeSheet,Tree[1]["nodo"]))
+            Tree[1]["nodo"].setChild(Tree[0][len(Tree[0])-1],Tree[1]["branch"])
         elif len(Atributes) == 0:
             # print("No hay mas atributos a analizar, tabla= ", pprint(Tabla, width=1))
 
-            Tree[0].append(self.ValorMasFreq(Tabla))
+            # Tree[0].append(self.ValorMasFreq(Tabla))
             self.G.add_node("Nodo%i"%len(Tree[0]),label=self.ValorMasFreq(Tabla), color='green')
             self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='black',label=Tree[1]["branch"])
+           
+            Tree[0].append(Node(self.ValorMasFreq(Tabla),Tree[1]["nodo"]))            
+            Tree[1]["nodo"].setChild(Tree[0][len(Tree[0])-1],Tree[1]["branch"])
         else:
             NodeParent = copy.deepcopy(Tree[1])
 
@@ -216,20 +225,22 @@ class GenerarArbol:
             Ag = self.mejorGananciayTasa(p0,EntropysAtr,Tabla)
 
             if p0 - EntropysAtr[Ag]["entropia"] < self.threshold and NodeParent["parent"] != None:
-                Tree[0].append(self.ValorMasFreq(Tabla))
+                # Tree[0].append(self.ValorMasFreq(Tabla))
                 self.G.add_node("Nodo%i"%len(Tree[0]),label=self.ValorMasFreq(Tabla), color='pink')
                 self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='pink',label=Tree[1]["branch"])
             else:
-                Tree[0].append(Ag)
-                
+                # Tree[0].append(Ag)
+                Tree[0].append(Node(Ag,NodeParent["nodo"]))
                 if NodeParent["parent"]== None:
                     self.G.add_node(Ag, color='red')
                     NodeParent["parent"] = Ag
                 else:
                     self.G.add_node("Nodo%i"%len(Tree[0]),label=Ag, color='blue')
                     self.G.add_edge(NodeParent["parent"],"Nodo%i"%len(Tree[0]), color='black',label=NodeParent["branch"])
-
                     NodeParent["parent"] = "Nodo%i"%len(Tree[0])
+                    NodeParent["nodo"].setChild(Tree[0][len(Tree[0])-1],NodeParent["branch"])
+
+                NodeParent["nodo"] = Tree[0][len(Tree[0])-1]
 
                 Dpartition = []
                 for var in EntropysAtr[Ag]["Vars"]:
@@ -245,11 +256,12 @@ class GenerarArbol:
                 for Dj in range(len(Dpartition)):
                     Tree[0].append(EntropysAtr[Ag]["Vars"][Dj])
                     NodeParent["branch"] = EntropysAtr[Ag]["Vars"][Dj]
-
+                    # Tree[len(Tree)-1].setChild(None,EntropysAtr[Ag]["Vars"][Dj])
+                    # Tree[0][len(Tree[0])-1].setChild(None,EntropysAtr[Ag]["Vars"][Dj])
                     Tabla = Dpartition[Dj]
                     self.AlgoritmoC45(Tabla,Atributes2,[Tree[0],NodeParent])
 
-        print("\nArbol: ",Tree[0])
+        return Tree[0]
         # print("\n Los atributos identificados son: ",Atributes,len(Atributes))
 
 class Node:
@@ -275,6 +287,9 @@ class GraphicInterface:
         self.threshold=0 #Variable que guardará el valor del TH ingresado, por default comienza en 0
         self.master = master
         self.agregar_menu()
+        self.ArbolGain=[]
+        self.ArbolGainRatio=[]
+        self.TablaTesteo=[]
         # self.scrolledtext1=st.ScrolledText(self.master, width=80, height=20)
         # self.scrolledtext1.grid(column=0,row=0, padx=10, pady=10)   
 
@@ -325,7 +340,7 @@ class GraphicInterface:
             self.contenido=nombrearch
             
 
-    def actualizarFile(self,archivo,opc):
+    def actualizarFile(self,datoFile,opc):
         fileant = self.contenido
         self.abrirAr()
         datoFile.set(self.contenido)
@@ -333,13 +348,13 @@ class GraphicInterface:
             self.actualizargrafico(opc)
     
     def actualizarTh(self,th,opc):
-        try:
-            th = float(th)
-            if th!=self.threshold:
-                self.threshold = th
-                self.actualizargrafico(opc)
-        except:
-            messagebox.showerror(message="Por favor, ingrese un valor valido", title="ERROR",parent=self.raiz)
+        # try:
+        th = float(th)
+        if th!=self.threshold:
+            self.threshold = th
+            self.actualizargrafico(opc)
+        # except:
+        #     messagebox.showerror(message="Por favor, ingrese un valor valido", title="ERROR",parent=self.raiz)
 
     def Cerrar(self):
         self.botonIniciar["state"]="normal"
@@ -381,7 +396,7 @@ class GraphicInterface:
 
             #Primer arbol
             Arbol = GenerarArbol(self.contenido)
-            Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+            self.ArbolGain=Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
             # write to a dot file
             Arbol.G.write('test.dot')
 
@@ -393,7 +408,7 @@ class GraphicInterface:
             #Segundo arbol
             Arbol = GenerarArbol(self.contenido)
             Arbol.TreexGan=False
-            Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+            self.ArbolGainRatio=Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
             # write to a dot file
             Arbol.G.write('test.dot')
             #create a png file
@@ -432,12 +447,16 @@ class GraphicInterface:
 
             self.pjelabel=tk.Label(self.miFrame2,bg="#9BBCD1",text="Porcentaje de Entrenamiento:",fg="black",height=2)
             self.pjelabel.place(x=800,y=50)
-            self.porcentaje = tk.Scale(self.miFrame2, from_=0, to=100, orient=HORIZONTAL,length=250)
+            self.porcentaje = tk.Scale(self.miFrame2, from_=1, to=100, orient=HORIZONTAL,length=250)
+            self.porcentaje.set(100)
+            self.porcentaje.bind("<ButtonRelease-1>", lambda x=None:self.actualizargrafico(self.datoGain.get()))
             self.porcentaje.place(x=980,y=40)
 
         else:   
             messagebox.showerror(message="Debe abrir un archivo .csv para continuar", title="ERROR")
 
+    def updateValue(self,*args):
+        print(self.porcentaje.get())
 
     def scroll_start(self, event):
         self.canvas.scan_mark(event.x, event.y)
@@ -451,10 +470,22 @@ class GraphicInterface:
 
     def actualizargrafico(self,opc):
         #Primer arbol
+        
         Arbol = GenerarArbol(self.contenido)
         Arbol.threshold = self.threshold
         # Arbol = GenerarArbol("./prueba5.csv")
-        Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+        print(len(Arbol.tabla))
+        if self.porcentaje.get()!=100:
+            pje= math.ceil(self.porcentaje.get()*(len(Arbol.tabla)-1)/100) + 1
+            print(pje,"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
+            self.TablaTesteo.append(Arbol.tabla[0])
+            while len(Arbol.tabla)>pje:
+                self.TablaTesteo.append(Arbol.tabla[-1])
+                Arbol.tabla.pop(-1)
+        print(Arbol.tabla)
+        self.ArbolGain=Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+
         # write to a dot file
         Arbol.G.write('test.dot')
 
@@ -468,7 +499,32 @@ class GraphicInterface:
         Arbol.threshold = self.threshold
         # Arbol = GenerarArbol("./prueba2.csv")
         Arbol.TreexGan=False
-        Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+        self.ArbolGainRatio=Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+
+        for t in self.ArbolGainRatio:
+            if not isinstance(t, str):
+                print(t.getName())
+                if t.getParent()!= None:
+                    print(t.getParent().getName())
+                for c in t.getChild():
+                    print(c)
+
+        flag=True
+        nodeRaiz=self.ArbolGain[0].getName()
+        while flag:
+            
+            c=0
+            while nodeRaiz!=self.TablaTesteo[0][c]:
+                c+=1
+            
+            try:
+                nodeRaiz=nodeRaiz.getChild()[self.TablaTesteo[1][self.TablaTesteo[0].index(self.TablaTesteo[c])]]
+                if nodeRaiz.getChild=={}:
+                    flag=False
+            except:
+                flag=False
+            
+        print("NODO HOJAAAAAAAAAA",nodeRaiz,self.TablaTesteo[1][-1])
         # write to a dot file
         Arbol.G.write('test.dot')
         #create a png file
