@@ -228,6 +228,8 @@ class GenerarArbol:
                 # Tree[0].append(self.ValorMasFreq(Tabla))
                 self.G.add_node("Nodo%i"%len(Tree[0]),label=self.ValorMasFreq(Tabla), color='pink')
                 self.G.add_edge(Tree[1]["parent"],"Nodo%i"%len(Tree[0]), color='pink',label=Tree[1]["branch"])
+                Tree[0].append(Node(self.ValorMasFreq(Tabla),Tree[1]["nodo"]))            
+                Tree[1]["nodo"].setChild(Tree[0][len(Tree[0])-1],Tree[1]["branch"])
             else:
                 # Tree[0].append(Ag)
                 Tree[0].append(Node(Ag,NodeParent["nodo"]))
@@ -238,7 +240,8 @@ class GenerarArbol:
                     self.G.add_node("Nodo%i"%len(Tree[0]),label=Ag, color='blue')
                     self.G.add_edge(NodeParent["parent"],"Nodo%i"%len(Tree[0]), color='black',label=NodeParent["branch"])
                     NodeParent["parent"] = "Nodo%i"%len(Tree[0])
-                    NodeParent["nodo"].setChild(Tree[0][len(Tree[0])-1],NodeParent["branch"])
+                    Tree[1]["nodo"].setChild(Tree[0][len(Tree[0])-1],NodeParent["branch"])
+                    # print(NodeParent["nodo"].getName(),"asddddddddddddddddddd",NodeParent["branch"])
 
                 NodeParent["nodo"] = Tree[0][len(Tree[0])-1]
 
@@ -290,6 +293,11 @@ class GraphicInterface:
         self.ArbolGain=[]
         self.ArbolGainRatio=[]
         self.TablaTesteo=[]
+        self.NuevaInstancia=[]
+        self.botonValue=None
+        self.valorAtribute=[]
+        self.win= None
+        self.value= None
         # self.scrolledtext1=st.ScrolledText(self.master, width=80, height=20)
         # self.scrolledtext1.grid(column=0,row=0, padx=10, pady=10)   
 
@@ -467,6 +475,7 @@ class GraphicInterface:
                 self.canvas.scan_dragto(event.x, event.y, gain=1)
             else:
                 self.canvas.scan_dragto(event.x, 0, gain=1)
+    # def actualizargrafico2(self,opc):
 
     def actualizargrafico(self,opc):
         #Primer arbol
@@ -474,17 +483,16 @@ class GraphicInterface:
         Arbol = GenerarArbol(self.contenido)
         Arbol.threshold = self.threshold
         # Arbol = GenerarArbol("./prueba5.csv")
-        print(len(Arbol.tabla))
         if self.porcentaje.get()!=100:
             pje= math.ceil(self.porcentaje.get()*(len(Arbol.tabla)-1)/100) + 1
-            print(pje,"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-
+            self.TablaTesteo=[]
             self.TablaTesteo.append(Arbol.tabla[0])
-            while len(Arbol.tabla)>pje:
-                self.TablaTesteo.append(Arbol.tabla[-1])
-                Arbol.tabla.pop(-1)
-        print(Arbol.tabla)
-        self.ArbolGain=Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+            TablaArbol=copy.deepcopy(Arbol.tabla)
+            while len(TablaArbol)>pje:
+                self.TablaTesteo.append(TablaArbol[-1])
+                TablaArbol.pop(-1)
+        print(TablaArbol,"AAAAAAAAAAAAAAAAAAAAAAAAAA")
+        self.ArbolGain=Arbol.AlgoritmoC45(TablaArbol,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
 
         # write to a dot file
         Arbol.G.write('test.dot')
@@ -499,32 +507,17 @@ class GraphicInterface:
         Arbol.threshold = self.threshold
         # Arbol = GenerarArbol("./prueba2.csv")
         Arbol.TreexGan=False
-        self.ArbolGainRatio=Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+        self.ArbolGainRatio=Arbol.AlgoritmoC45(TablaArbol,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
 
-        for t in self.ArbolGainRatio:
+        for t in self.ArbolGain:
             if not isinstance(t, str):
                 print(t.getName())
                 if t.getParent()!= None:
                     print(t.getParent().getName())
+                print(t.getChild())
                 for c in t.getChild():
                     print(c)
 
-        flag=True
-        nodeRaiz=self.ArbolGain[0].getName()
-        while flag:
-            
-            c=0
-            while nodeRaiz!=self.TablaTesteo[0][c]:
-                c+=1
-            
-            try:
-                nodeRaiz=nodeRaiz.getChild()[self.TablaTesteo[1][self.TablaTesteo[0].index(self.TablaTesteo[c])]]
-                if nodeRaiz.getChild=={}:
-                    flag=False
-            except:
-                flag=False
-            
-        print("NODO HOJAAAAAAAAAA",nodeRaiz,self.TablaTesteo[1][-1])
         # write to a dot file
         Arbol.G.write('test.dot')
         #create a png file
@@ -532,10 +525,133 @@ class GraphicInterface:
         Arbol.G.draw('arbol2.png') 
 
         self.graficar(opc)
+        if opc ==0:
+            if self.porcentaje.get()!=100:
+                TT=copy.deepcopy(self.TablaTesteo)
+                TT.pop(0)
+                acertados=0
+                for TablaTesteo in TT:
+                    flag=True
+                    print(self.TablaTesteo)
+                    print(self.ArbolGain[0].getChild())
+                    try:
+                        nodeRaiz=self.ArbolGain[0].getChild()[TablaTesteo[self.TablaTesteo[0].index(self.ArbolGain[0].getName())]]
+                        while flag and nodeRaiz.getChild() != {}:
+                            try:
+                                nodeRaiz=nodeRaiz.getChild()[TablaTesteo[self.TablaTesteo[0].index(nodeRaiz.getName())]]
+                            except:
+                                flag=False
 
+                        if flag:
+                            print(nodeRaiz.getName())
+                            if nodeRaiz.getName()==TablaTesteo[-1]:
+                                acertados+=1
+                    except:
+                            flag=False
+
+                messagebox.showinfo(title="Punteria Ganancia", message="La punteria calculada con los datos de testeo es de %f %s" %( round(acertados*100/len(TT),1) , "%",))  
+        else:
+            if self.porcentaje.get()!=100:
+                TT=copy.deepcopy(self.TablaTesteo)
+                TT.pop(0)
+                acertados=0
+                for TablaTesteo in TT:
+                    flag=True
+                    print(self.TablaTesteo)
+                    print(self.ArbolGainRatio[0].getChild())
+                    try:
+                        nodeRaiz=self.ArbolGainRatio[0].getChild()[TablaTesteo[self.TablaTesteo[0].index(self.ArbolGainRatio[0].getName())]]
+                        while flag and nodeRaiz.getChild() != {}:
+                            try:
+                                nodeRaiz=nodeRaiz.getChild()[TablaTesteo[self.TablaTesteo[0].index(nodeRaiz.getName())]]
+                            except:
+                                flag=False
+
+                        if flag:
+                            print(nodeRaiz.getName())
+                            if nodeRaiz.getName()==TablaTesteo[-1]:
+                                acertados+=1
+                    except:
+                            flag=False
+
+                messagebox.showinfo(title="Punteria Tasa de Ganancia", message="La punteria calculada con los datos de testeo es de %f %s" %( round(acertados*100/len(TT),1) , "%",))
+
+        # if messagebox.askyesno(message="¿Desea agregar nuevas instancias?", title="Nuevas Instancias"):
+        
+        #     self.ObtenerInstancia(opc)
+    
+    def ObtenerInstancia(self,opc):
+        self.NuevaInstancia=[]
+        self.valorAtribute=self.TablaTesteo[0][0]
+        self.win= Tk()
+
+        #Define geometry of the window
+        self.win.geometry("550x250")
+        self.win.config(bg="#9BBCD1")
+
+        miFrame1=tk.Frame(self.win, width=800, height=100,bg="#9BBCD1",relief="groove", borderwidth=5)
+        miFrame1.pack(fill="both",side="top")
+
+        self.value=tk.Label(miFrame1,bg="#9BBCD1",text="Ingrese el valor de %s:"%(self.valorAtribute),fg="black",height=2)
+        datoV=tk.StringVar()
+        datoV.set(0)
+        entradaValue=tk.Entry(miFrame1,textvariable=datoV)
+        self.botonValue=tk.Button(miFrame1, text="Agregar",bg="#2D373D",fg="#42D5FF",width=20,height=0,command=lambda:self.cambiarAtributo(entradaValue.get(),opc))
+
+        self.value.pack(fill="both",side="top")
+        entradaValue.pack(fill="both",side="top")
+        self.botonValue.pack(fill="both",side="top")
+
+        self.win.mainloop()
+
+    def cambiarAtributo(self,valor,opc):
+        self.NuevaInstancia.append(valor)
+        if len(self.NuevaInstancia)==len(self.TablaTesteo[0]):
+            if opc==0:
+                try:
+                    print(self.NuevaInstancia)
+                    nodeRaiz=self.ArbolGain[0].getChild()[self.NuevaInstancia[self.TablaTesteo[0].index(self.ArbolGain[0].getName())]]
+                    while flag and nodeRaiz.getChild() != {}:
+                        try:
+                            nodeRaiz=nodeRaiz.getChild()[self.NuevaInstancia[self.TablaTesteo[0].index(nodeRaiz.getName())]]
+                        except:
+                            flag=False
+
+                    if flag:
+                        messagebox.showinfo(title="Nueva instancia definida", message="La nueva instancia pertenece a la clase %s"%(nodeRaiz.getName(),))
+                    else:
+                        messagebox.showinfo(title="Nueva instancia definida", message="No se pudo clasificar la nueva instancia ingresada")
+                except:
+                    messagebox.showinfo(title="Nueva instancia definida", message="No se pudo clasificar la nueva instancia ingresada")   
+            else:
+                try:
+                    print(self.NuevaInstancia)
+                    nodeRaiz=self.ArbolGainRatio[0].getChild()[self.NuevaInstancia[self.TablaTesteo[0].index(self.ArbolGainRatio[0].getName())]]
+                    while flag and nodeRaiz.getChild() != {}:
+                        try:
+                            nodeRaiz=nodeRaiz.getChild()[self.NuevaInstancia[self.TablaTesteo[0].index(nodeRaiz.getName())]]
+                        except:
+                            flag=False
+
+                    if flag:
+                        messagebox.showinfo(title="Nueva instancia definida", message="La nueva instancia pertenece a la clase %s"%(nodeRaiz.getName(),))
+                    else:
+                        messagebox.showinfo(title="Nueva instancia definida", message="No se pudo clasificar la nueva instancia ingresada")
+                except:
+                    messagebox.showinfo(title="Nueva instancia definida", message="No se pudo clasificar la nueva instancia ingresada")   
+            self.win.destroy() 
+            if messagebox.askyesno(message="¿Desea agregar nuevas instancias?", title="Nuevas Instancias"):
+                self.ObtenerInstancia()     
+        else:
+            self.valorAtribute=self.TablaTesteo[0][self.TablaTesteo[0].index(self.valorAtribute)+1]
+            self.value.pack_forget()
+            self.value.pack(fill="both",side="top")
+    
     def graficar(self,opc):
             
         if opc==0:
+ 
+
             self.img = cv2.imread('arbol.png')
             if self.img.shape[1] < 1280:
                 x = (1280 - self.img.shape[1])/2
@@ -562,6 +678,7 @@ class GraphicInterface:
             self.canvas.bind("<ButtonPress-1>", self.scroll_start)
             self.canvas.bind("<B1-Motion>", self.scroll_move)
         else:
+
             self.img = cv2.imread('arbol2.png')
 
             if self.img.shape[1] < 1280:
