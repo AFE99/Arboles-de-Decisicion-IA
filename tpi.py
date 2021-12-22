@@ -298,6 +298,7 @@ class GraphicInterface:
         self.valorAtribute=[]
         self.win= None
         self.value= None
+        
         # self.scrolledtext1=st.ScrolledText(self.master, width=80, height=20)
         # self.scrolledtext1.grid(column=0,row=0, padx=10, pady=10)   
 
@@ -491,8 +492,8 @@ class GraphicInterface:
             while len(TablaArbol)>pje:
                 self.TablaTesteo.append(TablaArbol[-1])
                 TablaArbol.pop(-1)
-        print(TablaArbol,"AAAAAAAAAAAAAAAAAAAAAAAAAA")
-        self.ArbolGain=Arbol.AlgoritmoC45(TablaArbol,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+            self.ArbolGain=Arbol.AlgoritmoC45(TablaArbol,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+        self.ArbolGain=Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
 
         # write to a dot file
         Arbol.G.write('test.dot')
@@ -507,7 +508,16 @@ class GraphicInterface:
         Arbol.threshold = self.threshold
         # Arbol = GenerarArbol("./prueba2.csv")
         Arbol.TreexGan=False
-        self.ArbolGainRatio=Arbol.AlgoritmoC45(TablaArbol,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+        if self.porcentaje.get()!=100:
+            pje= math.ceil(self.porcentaje.get()*(len(Arbol.tabla)-1)/100) + 1
+            self.TablaTesteo=[]
+            self.TablaTesteo.append(Arbol.tabla[0])
+            TablaArbol=copy.deepcopy(Arbol.tabla)
+            while len(TablaArbol)>pje:
+                self.TablaTesteo.append(TablaArbol[-1])
+                TablaArbol.pop(-1)
+            self.ArbolGainRatio=Arbol.AlgoritmoC45(TablaArbol,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
+        self.ArbolGainRatio=Arbol.AlgoritmoC45(Arbol.tabla,Arbol.Atributes,[Arbol.Tree,Arbol.NodeParent])
 
         for t in self.ArbolGain:
             if not isinstance(t, str):
@@ -705,6 +715,8 @@ class GraphicInterface:
             
             self.canvas.bind("<ButtonPress-1>", self.scroll_start)
             self.canvas.bind("<B1-Motion>", self.scroll_move)
+
+        
 
 if __name__ == "__main__":
     raizMaster = tk.Tk()

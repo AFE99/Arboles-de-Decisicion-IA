@@ -1,0 +1,351 @@
+﻿id,colorCabello,colorOjos,estatura,colorPiel,cantIdiomas,deporteFav,estudiosAc,tomaMate,esArgentino
+1,oscuro,oscuros,alto,claro,2,softball,hasta secundaria,si,si
+2,oscuro,oscuros,alto,oscuro,3,badminton,universitario,si,no
+3,claro,claros,mediano,claro,2,croquet,universitario,no,no
+4,oscuro,claros,alto,claro,1,floorBall,hasta secundaria,si,si
+5,oscuro,claros,alto,claro,1,ciclismo,universitario,no,no
+6,claro,claros,mediano,claro,2,croquet,hasta secundaria,si,no
+7,oscuro,claros,alto,oscuro,3,ciclismo,hasta primaria,si,no
+8,oscuro,oscuros,bajo,oscuro,2,voleiball,universitario,no,no
+9,claro,claros,mediano,claro,2,pingPong,hasta secundaria,no,no
+10,oscuro,claros,bajo,claro,3,pingPong,universitario,no,no
+11,claro,oscuros,mediano,oscuro,1,futbolAmericano,hasta secundaria,si,no
+12,oscuro,claros,bajo,claro,1,softball,hasta primaria,no,no
+13,claro,claros,alto,claro,1,basquetball,hasta primaria,no,no
+14,claro,claros,alto,claro,3,tejo,universitario,si,no
+15,claro,oscuros,alto,claro,1,atletismo,hasta primaria,no,no
+16,claro,claros,alto,claro,1,squash,universitario,no,no
+17,claro,claros,mediano,claro,3,billar,hasta secundaria,no,no
+18,claro,oscuros,bajo,claro,2,baseball,universitario,no,no
+19,oscuro,oscuros,mediano,claro,3,baseball,hasta secundaria,si,no
+20,oscuro,claros,alto,claro,1,croquet,hasta primaria,si,no
+21,oscuro,oscuros,alto,oscuro,1,softTenis,hasta secundaria,no,no
+22,oscuro,claros,mediano,claro,1,billar,hasta secundaria,no,no
+23,oscuro,claros,bajo,claro,2,basquetball,hasta primaria,no,no
+24,oscuro,claros,alto,claro,2,voleiball,hasta secundaria,si,si
+25,claro,oscuros,alto,claro,3,basquetball,hasta primaria,no,no
+26,claro,claros,bajo,claro,3,paddle,hasta secundaria,no,no
+27,claro,claros,alto,claro,2,pingPong,hasta primaria,si,no
+28,claro,claros,alto,claro,2,croquet,hasta primaria,si,no
+29,oscuro,oscuros,alto,claro,2,atletismo,hasta primaria,no,no
+30,oscuro,claros,bajo,oscuro,3,futbolAmericano,universitario,si,no
+31,claro,claros,mediano,oscuro,2,floorBall,hasta secundaria,si,si
+32,oscuro,claros,alto,oscuro,1,handball,universitario,no,no
+33,oscuro,claros,alto,claro,2,baseball,universitario,si,no
+34,oscuro,oscuros,alto,claro,1,croquet,hasta primaria,si,no
+35,claro,claros,mediano,oscuro,1,golf,hasta secundaria,si,no
+36,claro,claros,alto,oscuro,1,paddle,universitario,no,no
+37,claro,oscuros,bajo,claro,1,ciclismo,hasta primaria,si,si
+38,oscuro,oscuros,mediano,claro,3,ciclismo,hasta secundaria,si,no
+39,claro,claros,bajo,oscuro,2,floorBall,hasta primaria,no,no
+40,oscuro,claros,mediano,claro,2,paddle,hasta primaria,si,si
+41,claro,claros,bajo,oscuro,3,tejo,hasta secundaria,no,no
+42,claro,claros,alto,oscuro,2,paddle,hasta primaria,si,no
+43,claro,oscuros,alto,oscuro,2,billar,hasta primaria,si,si
+44,oscuro,oscuros,mediano,oscuro,2,basquetball,universitario,no,no
+45,oscuro,claros,alto,oscuro,2,softTenis,universitario,si,no
+46,oscuro,oscuros,bajo,oscuro,2,polo,universitario,si,si
+47,oscuro,claros,mediano,oscuro,3,voleiball,hasta primaria,si,no
+48,claro,claros,bajo,oscuro,3,softball,hasta primaria,si,no
+49,claro,oscuros,alto,oscuro,2,tejo,hasta primaria,no,no
+50,oscuro,oscuros,bajo,oscuro,1,atletismo,universitario,si,si
+51,oscuro,oscuros,bajo,claro,2,paddle,universitario,no,no
+52,oscuro,claros,mediano,oscuro,2,voleiball,hasta secundaria,no,no
+53,claro,oscuros,bajo,claro,2,handball,universitario,si,si
+54,oscuro,claros,bajo,claro,2,pingPong,universitario,no,no
+55,claro,claros,alto,claro,2,ciclismo,hasta secundaria,si,no
+56,claro,oscuros,bajo,claro,2,billar,universitario,si,si
+57,claro,oscuros,alto,claro,3,paddle,hasta primaria,no,no
+58,claro,claros,mediano,claro,1,softTenis,hasta secundaria,si,no
+59,claro,oscuros,mediano,claro,3,billar,universitario,si,no
+60,oscuro,claros,mediano,claro,3,handball,universitario,no,no
+61,oscuro,claros,mediano,claro,3,ciclismo,hasta secundaria,no,no
+62,claro,oscuros,bajo,claro,3,golf,hasta secundaria,si,no
+63,oscuro,claros,mediano,oscuro,1,futbol,universitario,no,no
+64,oscuro,oscuros,alto,claro,2,ciclismo,hasta secundaria,no,no
+65,oscuro,claros,alto,oscuro,1,ciclismo,hasta primaria,si,si
+66,claro,claros,alto,claro,2,ciclismo,universitario,si,no
+67,oscuro,oscuros,alto,oscuro,2,floorBall,hasta secundaria,si,si
+68,claro,oscuros,mediano,claro,2,pingPong,hasta secundaria,si,si
+69,claro,claros,mediano,oscuro,1,atletismo,hasta secundaria,no,no
+70,oscuro,claros,mediano,oscuro,2,badminton,hasta secundaria,no,no
+71,claro,oscuros,alto,claro,1,badminton,universitario,si,no
+72,claro,claros,bajo,oscuro,3,billar,hasta primaria,no,no
+73,oscuro,claros,mediano,oscuro,2,baseball,hasta primaria,si,no
+74,claro,claros,bajo,oscuro,2,floorBall,universitario,si,si
+75,claro,claros,bajo,claro,3,golf,universitario,si,no
+76,oscuro,claros,alto,oscuro,2,floorBall,hasta primaria,si,si
+77,oscuro,claros,mediano,oscuro,1,ciclismo,hasta primaria,no,no
+78,oscuro,claros,alto,claro,1,badminton,hasta secundaria,si,no
+79,oscuro,oscuros,mediano,claro,1,baseball,hasta primaria,no,no
+80,oscuro,oscuros,alto,claro,3,tejo,hasta primaria,no,no
+81,oscuro,claros,mediano,oscuro,2,handball,universitario,si,si
+82,oscuro,oscuros,mediano,claro,3,golf,hasta secundaria,si,no
+83,claro,oscuros,bajo,claro,1,handball,universitario,no,no
+84,claro,claros,alto,claro,3,voleiball,hasta secundaria,si,no
+85,claro,claros,alto,claro,2,basquetball,hasta secundaria,si,no
+86,oscuro,claros,bajo,claro,2,pingPong,universitario,no,no
+87,claro,oscuros,alto,oscuro,1,squash,hasta secundaria,no,no
+88,claro,oscuros,mediano,oscuro,3,voleiball,universitario,si,no
+89,claro,oscuros,alto,oscuro,3,voleiball,hasta secundaria,no,no
+90,claro,claros,bajo,claro,1,handball,hasta primaria,si,si
+91,oscuro,claros,bajo,oscuro,2,basquetball,hasta primaria,no,no
+92,claro,claros,alto,claro,3,tejo,universitario,no,no
+93,claro,oscuros,bajo,oscuro,1,pingPong,hasta primaria,no,no
+94,oscuro,oscuros,alto,claro,2,handball,universitario,no,no
+95,oscuro,claros,mediano,claro,3,basquetball,hasta secundaria,no,no
+96,claro,oscuros,alto,claro,1,ciclismo,hasta secundaria,si,si
+97,claro,claros,mediano,claro,2,handball,universitario,si,si
+98,oscuro,claros,bajo,claro,3,basquetball,hasta secundaria,no,no
+99,oscuro,oscuros,alto,oscuro,1,voleiball,hasta primaria,no,no
+100,oscuro,claros,alto,oscuro,2,badminton,hasta secundaria,no,no
+101,claro,oscuros,bajo,claro,1,futbolAmericano,hasta primaria,si,no
+102,oscuro,oscuros,bajo,claro,1,futbolAmericano,hasta secundaria,no,no
+103,claro,oscuros,alto,oscuro,2,squash,universitario,no,no
+104,oscuro,oscuros,alto,oscuro,2,futbolAmericano,hasta secundaria,si,no
+105,claro,claros,alto,claro,2,croquet,hasta secundaria,si,no
+106,claro,oscuros,alto,claro,3,squash,hasta secundaria,si,no
+107,oscuro,oscuros,bajo,claro,2,golf,hasta secundaria,no,no
+108,claro,oscuros,mediano,oscuro,1,floorBall,hasta primaria,si,si
+109,oscuro,oscuros,bajo,oscuro,1,golf,universitario,no,no
+110,oscuro,claros,alto,oscuro,3,basquetball,hasta secundaria,si,no
+111,claro,claros,alto,oscuro,1,squash,hasta secundaria,no,no
+112,claro,oscuros,bajo,claro,1,badminton,hasta secundaria,si,no
+113,claro,oscuros,bajo,claro,2,paddle,universitario,no,no
+114,oscuro,oscuros,bajo,oscuro,1,voleiball,hasta primaria,si,si
+115,oscuro,claros,bajo,oscuro,2,tejo,hasta primaria,no,no
+116,claro,claros,mediano,claro,1,ciclismo,hasta primaria,no,no
+117,claro,oscuros,mediano,oscuro,3,softTenis,universitario,no,no
+118,claro,oscuros,mediano,claro,3,futbol,universitario,no,no
+119,oscuro,claros,bajo,oscuro,3,billar,hasta secundaria,si,no
+120,claro,oscuros,bajo,oscuro,3,voleiball,hasta primaria,no,no
+121,oscuro,claros,mediano,claro,3,futbolAmericano,hasta secundaria,no,no
+122,claro,oscuros,bajo,oscuro,1,voleiball,hasta primaria,si,si
+123,oscuro,oscuros,bajo,oscuro,2,floorBall,universitario,no,no
+124,oscuro,claros,mediano,claro,2,billar,hasta primaria,no,no
+125,oscuro,oscuros,mediano,oscuro,1,squash,hasta primaria,no,no
+126,claro,claros,mediano,oscuro,1,billar,universitario,no,no
+127,claro,oscuros,bajo,oscuro,3,voleiball,universitario,no,no
+128,oscuro,oscuros,alto,claro,2,atletismo,hasta secundaria,no,no
+129,oscuro,oscuros,mediano,oscuro,2,billar,universitario,no,no
+130,oscuro,oscuros,mediano,claro,2,voleiball,hasta primaria,no,no
+131,claro,claros,mediano,oscuro,2,ciclismo,hasta secundaria,no,no
+132,oscuro,claros,alto,oscuro,1,golf,hasta secundaria,si,no
+133,claro,oscuros,bajo,oscuro,1,ciclismo,universitario,no,no
+134,oscuro,oscuros,mediano,claro,2,baseball,universitario,si,no
+135,claro,oscuros,mediano,claro,1,voleiball,hasta secundaria,no,no
+136,oscuro,oscuros,alto,oscuro,3,voleiball,universitario,si,no
+137,oscuro,oscuros,bajo,claro,2,basquetball,hasta primaria,no,no
+138,claro,oscuros,mediano,oscuro,1,futbolAmericano,universitario,no,no
+139,claro,oscuros,mediano,oscuro,3,atletismo,hasta primaria,si,no
+140,claro,oscuros,alto,oscuro,1,handball,universitario,si,si
+141,oscuro,oscuros,mediano,oscuro,1,floorBall,hasta secundaria,si,si
+142,claro,oscuros,mediano,claro,2,pingPong,hasta secundaria,si,si
+143,claro,claros,bajo,oscuro,2,atletismo,universitario,si,si
+144,claro,oscuros,bajo,claro,1,pingPong,hasta primaria,si,si
+145,claro,oscuros,bajo,oscuro,3,baseball,hasta primaria,si,no
+146,oscuro,claros,alto,claro,3,badminton,hasta secundaria,si,no
+147,oscuro,claros,mediano,oscuro,3,handball,hasta primaria,no,no
+148,claro,oscuros,mediano,claro,3,basquetball,hasta secundaria,si,no
+149,oscuro,oscuros,alto,claro,1,squash,universitario,si,no
+150,claro,claros,mediano,oscuro,2,futbolAmericano,hasta primaria,si,no
+151,claro,oscuros,bajo,claro,3,voleiball,universitario,no,no
+152,claro,claros,bajo,oscuro,3,floorBall,hasta primaria,si,no
+153,claro,oscuros,mediano,oscuro,3,paddle,universitario,si,no
+154,claro,claros,bajo,oscuro,1,basquetball,hasta primaria,si,si
+155,claro,claros,bajo,claro,2,handball,hasta secundaria,si,si
+156,claro,oscuros,mediano,oscuro,3,paddle,hasta primaria,no,no
+157,claro,claros,mediano,claro,1,floorBall,universitario,si,si
+158,oscuro,claros,bajo,claro,3,softball,hasta secundaria,si,no
+159,claro,oscuros,mediano,oscuro,3,softTenis,universitario,si,no
+160,oscuro,claros,alto,claro,1,handball,universitario,no,no
+161,oscuro,oscuros,mediano,oscuro,1,paddle,hasta primaria,si,si
+162,oscuro,claros,mediano,claro,1,softTenis,hasta secundaria,si,no
+163,claro,oscuros,bajo,claro,1,softTenis,hasta secundaria,no,no
+164,oscuro,oscuros,bajo,oscuro,1,handball,hasta primaria,si,si
+165,oscuro,claros,alto,claro,3,atletismo,hasta primaria,si,no
+166,claro,oscuros,alto,oscuro,1,basquetball,hasta secundaria,no,no
+167,oscuro,oscuros,mediano,oscuro,2,ciclismo,hasta secundaria,no,no
+168,claro,oscuros,bajo,oscuro,1,golf,universitario,no,no
+169,claro,oscuros,bajo,oscuro,2,billar,universitario,no,no
+170,oscuro,oscuros,alto,oscuro,2,pingPong,hasta primaria,no,no
+171,oscuro,oscuros,bajo,oscuro,2,pingPong,hasta primaria,no,no
+172,oscuro,oscuros,bajo,claro,3,futbolAmericano,hasta primaria,si,no
+173,oscuro,oscuros,mediano,claro,3,pingPong,hasta primaria,no,no
+174,oscuro,oscuros,alto,claro,3,basquetball,universitario,si,no
+175,claro,oscuros,mediano,claro,3,voleiball,universitario,si,no
+176,claro,claros,alto,oscuro,2,croquet,hasta secundaria,si,no
+177,claro,claros,alto,claro,1,baseball,hasta primaria,no,no
+178,claro,claros,mediano,oscuro,1,golf,hasta primaria,si,no
+179,claro,claros,bajo,oscuro,3,softball,universitario,si,no
+180,claro,claros,mediano,oscuro,3,futbol,hasta primaria,no,no
+181,claro,oscuros,alto,oscuro,3,baseball,universitario,si,no
+182,claro,oscuros,bajo,claro,3,ciclismo,hasta secundaria,no,no
+183,oscuro,claros,mediano,oscuro,3,handball,hasta primaria,no,no
+184,oscuro,oscuros,alto,oscuro,2,croquet,universitario,no,no
+185,oscuro,oscuros,bajo,claro,1,squash,universitario,si,no
+186,claro,claros,alto,claro,2,croquet,hasta secundaria,no,no
+187,claro,claros,alto,oscuro,3,softTenis,hasta secundaria,si,no
+188,oscuro,oscuros,bajo,oscuro,3,futbolAmericano,hasta secundaria,si,no
+189,oscuro,claros,alto,oscuro,1,baseball,universitario,no,no
+190,claro,claros,mediano,claro,3,baseball,hasta secundaria,no,no
+191,claro,claros,mediano,claro,2,handball,hasta secundaria,si,si
+192,claro,claros,bajo,oscuro,1,softball,hasta primaria,si,si
+193,claro,oscuros,alto,claro,2,floorBall,hasta primaria,si,si
+194,oscuro,oscuros,alto,claro,3,badminton,universitario,si,no
+195,oscuro,claros,alto,oscuro,3,ciclismo,hasta primaria,no,no
+196,oscuro,oscuros,bajo,oscuro,2,basquetball,universitario,si,si
+197,oscuro,oscuros,alto,oscuro,3,atletismo,hasta secundaria,no,no
+198,claro,oscuros,bajo,oscuro,2,croquet,hasta primaria,no,no
+199,claro,claros,bajo,oscuro,1,futbolAmericano,hasta primaria,no,no
+200,claro,claros,alto,claro,1,billar,hasta primaria,si,no
+201,oscuro,oscuros,bajo,claro,2,handball,hasta secundaria,si,si
+202,oscuro,claros,bajo,claro,1,squash,hasta secundaria,si,no
+203,claro,claros,mediano,oscuro,2,croquet,hasta secundaria,no,no
+204,claro,claros,bajo,claro,1,tejo,hasta secundaria,no,no
+205,claro,claros,alto,oscuro,3,paddle,hasta primaria,si,no
+206,oscuro,claros,mediano,claro,3,softTenis,universitario,no,no
+207,claro,claros,bajo,oscuro,2,pingPong,hasta secundaria,si,si
+208,oscuro,claros,bajo,oscuro,3,softTenis,universitario,si,no
+209,oscuro,claros,mediano,claro,1,paddle,hasta secundaria,no,no
+210,claro,oscuros,mediano,claro,1,handball,universitario,si,si
+211,oscuro,oscuros,alto,claro,2,softball,hasta secundaria,no,no
+212,claro,oscuros,mediano,oscuro,1,softball,universitario,no,no
+213,claro,oscuros,mediano,oscuro,3,handball,hasta primaria,si,no
+214,claro,oscuros,alto,claro,2,futbolAmericano,universitario,no,no
+215,oscuro,claros,alto,oscuro,2,tejo,hasta secundaria,no,no
+216,claro,claros,bajo,claro,3,floorBall,hasta secundaria,si,no
+217,claro,oscuros,mediano,claro,2,croquet,universitario,no,no
+218,claro,oscuros,bajo,claro,2,futbol,hasta primaria,si,si
+219,claro,oscuros,bajo,oscuro,3,voleiball,hasta primaria,si,no
+220,oscuro,oscuros,mediano,oscuro,1,softball,hasta primaria,no,no
+221,oscuro,oscuros,bajo,oscuro,3,paddle,universitario,no,no
+222,claro,oscuros,mediano,oscuro,3,softTenis,universitario,no,no
+223,oscuro,claros,mediano,claro,3,futbol,universitario,no,no
+224,claro,oscuros,mediano,claro,3,handball,universitario,no,no
+225,oscuro,claros,alto,oscuro,3,tejo,universitario,no,no
+226,oscuro,claros,alto,claro,3,futbolAmericano,hasta primaria,no,no
+227,claro,oscuros,mediano,oscuro,2,badminton,hasta primaria,no,no
+228,oscuro,oscuros,alto,claro,2,basquetball,universitario,si,si
+229,oscuro,oscuros,mediano,claro,3,badminton,universitario,no,no
+230,oscuro,claros,bajo,oscuro,2,pingPong,hasta secundaria,no,no
+231,claro,claros,bajo,claro,1,squash,hasta primaria,si,no
+232,claro,oscuros,bajo,claro,1,futbol,hasta primaria,si,si
+233,oscuro,claros,alto,claro,3,croquet,hasta secundaria,si,no
+234,claro,oscuros,bajo,oscuro,1,basquetball,universitario,si,si
+235,oscuro,oscuros,alto,claro,1,futbolAmericano,hasta secundaria,no,no
+236,claro,oscuros,mediano,oscuro,1,futbolAmericano,universitario,si,no
+237,oscuro,oscuros,alto,claro,3,squash,hasta secundaria,no,no
+238,oscuro,claros,mediano,oscuro,3,badminton,hasta secundaria,si,no
+239,claro,oscuros,alto,claro,3,atletismo,universitario,si,no
+240,oscuro,claros,mediano,oscuro,2,handball,hasta secundaria,no,no
+241,claro,claros,alto,oscuro,3,futbolAmericano,hasta secundaria,si,no
+242,oscuro,oscuros,bajo,claro,1,polo,hasta secundaria,si,si
+243,claro,oscuros,mediano,oscuro,1,futbolAmericano,universitario,si,no
+244,oscuro,oscuros,alto,claro,3,softball,hasta secundaria,si,no
+245,oscuro,oscuros,bajo,claro,2,croquet,hasta primaria,si,no
+246,oscuro,oscuros,bajo,oscuro,3,paddle,hasta secundaria,si,no
+247,oscuro,claros,alto,oscuro,3,pingPong,universitario,no,no
+248,claro,oscuros,bajo,oscuro,2,voleiball,hasta primaria,no,no
+249,claro,claros,bajo,oscuro,3,squash,universitario,si,no
+250,oscuro,oscuros,bajo,oscuro,1,badminton,hasta primaria,no,no
+251,oscuro,oscuros,mediano,oscuro,2,handball,universitario,si,si
+252,claro,claros,alto,claro,3,futbol,hasta secundaria,si,no
+253,oscuro,oscuros,alto,claro,1,futbolAmericano,hasta primaria,si,no
+254,claro,claros,alto,oscuro,1,baseball,hasta secundaria,no,no
+255,oscuro,claros,mediano,oscuro,1,tejo,hasta primaria,si,si
+256,claro,oscuros,alto,oscuro,1,ciclismo,hasta primaria,no,no
+257,claro,oscuros,alto,claro,1,tejo,hasta primaria,no,no
+258,oscuro,claros,alto,claro,2,golf,hasta secundaria,no,no
+259,oscuro,claros,alto,oscuro,1,ciclismo,hasta secundaria,no,no
+260,claro,claros,mediano,oscuro,1,ciclismo,universitario,no,no
+261,claro,oscuros,alto,oscuro,2,softball,hasta primaria,si,si
+262,claro,claros,mediano,oscuro,1,tejo,hasta secundaria,si,si
+263,oscuro,claros,mediano,oscuro,2,softTenis,hasta primaria,no,no
+264,claro,oscuros,mediano,claro,2,voleiball,hasta secundaria,si,si
+265,claro,oscuros,alto,claro,3,voleiball,hasta primaria,no,no
+266,oscuro,claros,mediano,oscuro,2,tejo,universitario,si,si
+267,claro,oscuros,bajo,oscuro,3,polo,universitario,si,no
+268,oscuro,claros,bajo,oscuro,1,futbolAmericano,universitario,no,no
+269,oscuro,oscuros,alto,claro,1,floorBall,hasta primaria,si,si
+270,oscuro,oscuros,alto,oscuro,3,futbolAmericano,hasta primaria,si,no
+271,oscuro,oscuros,mediano,oscuro,2,basquetball,universitario,si,si
+272,claro,oscuros,bajo,oscuro,2,pingPong,universitario,si,si
+273,claro,oscuros,alto,oscuro,3,golf,hasta primaria,si,no
+274,claro,claros,alto,oscuro,2,futbolAmericano,universitario,si,no
+275,claro,claros,bajo,oscuro,2,badminton,hasta primaria,no,no
+276,claro,claros,bajo,oscuro,1,handball,hasta primaria,no,no
+277,oscuro,claros,bajo,oscuro,1,ciclismo,hasta secundaria,no,no
+278,claro,oscuros,bajo,claro,3,floorBall,universitario,no,no
+279,claro,oscuros,alto,claro,1,baseball,hasta primaria,no,no
+280,claro,claros,alto,claro,2,baseball,hasta secundaria,no,no
+281,claro,oscuros,mediano,oscuro,2,baseball,hasta primaria,no,no
+282,oscuro,claros,mediano,claro,3,futbol,hasta secundaria,si,no
+283,oscuro,oscuros,alto,claro,1,billar,hasta primaria,si,si
+284,oscuro,oscuros,alto,claro,2,golf,hasta secundaria,si,no
+285,claro,claros,bajo,claro,2,softTenis,universitario,no,no
+286,oscuro,claros,mediano,claro,1,softball,universitario,si,si
+287,oscuro,claros,alto,claro,1,polo,hasta secundaria,si,si
+288,claro,oscuros,bajo,claro,3,futbol,hasta secundaria,no,no
+289,claro,oscuros,alto,claro,3,pingPong,universitario,no,no
+290,oscuro,oscuros,alto,oscuro,3,tejo,universitario,si,no
+291,oscuro,claros,alto,oscuro,3,badminton,hasta primaria,no,no
+292,oscuro,oscuros,bajo,oscuro,1,polo,universitario,no,no
+293,oscuro,claros,alto,claro,3,voleiball,hasta primaria,si,no
+294,claro,oscuros,mediano,claro,2,ciclismo,hasta primaria,no,no
+295,oscuro,oscuros,mediano,claro,3,badminton,hasta secundaria,si,no
+296,claro,claros,alto,claro,2,baseball,universitario,si,no
+297,oscuro,claros,mediano,claro,1,softball,hasta secundaria,si,si
+298,oscuro,claros,alto,claro,3,polo,universitario,no,no
+299,oscuro,oscuros,alto,oscuro,1,golf,hasta secundaria,no,no
+300,oscuro,oscuros,mediano,oscuro,1,tejo,hasta primaria,si,si
+301,claro,oscuros,bajo,claro,3,baseball,universitario,no,no
+302,oscuro,oscuros,mediano,claro,2,badminton,universitario,si,no
+303,claro,oscuros,alto,claro,2,squash,hasta secundaria,si,no
+304,oscuro,claros,alto,oscuro,2,atletismo,universitario,si,si
+305,oscuro,oscuros,alto,claro,3,tejo,hasta primaria,si,no
+306,claro,oscuros,mediano,oscuro,2,atletismo,universitario,no,no
+307,claro,oscuros,bajo,oscuro,1,paddle,universitario,si,si
+308,oscuro,claros,mediano,oscuro,1,softball,hasta secundaria,no,no
+309,claro,claros,alto,claro,3,floorBall,universitario,no,no
+310,oscuro,claros,alto,claro,2,basquetball,hasta primaria,no,no
+311,claro,claros,bajo,oscuro,1,pingPong,hasta secundaria,si,si
+312,claro,oscuros,bajo,claro,1,paddle,hasta secundaria,si,si
+313,claro,claros,mediano,claro,1,basquetball,hasta primaria,no,no
+314,claro,oscuros,bajo,oscuro,2,voleiball,hasta primaria,no,no
+315,oscuro,oscuros,bajo,claro,3,paddle,hasta primaria,si,no
+316,claro,oscuros,alto,oscuro,2,voleiball,hasta secundaria,no,no
+317,claro,oscuros,alto,oscuro,1,handball,hasta primaria,si,si
+318,claro,claros,bajo,oscuro,2,voleiball,hasta primaria,no,no
+319,oscuro,oscuros,alto,claro,2,tejo,hasta secundaria,si,si
+320,oscuro,oscuros,alto,oscuro,1,croquet,universitario,no,no
+321,claro,oscuros,mediano,claro,2,croquet,hasta secundaria,no,no
+322,oscuro,claros,alto,oscuro,1,ciclismo,hasta secundaria,si,si
+323,oscuro,oscuros,alto,oscuro,2,softball,universitario,no,no
+324,claro,oscuros,alto,oscuro,3,softTenis,universitario,si,no
+325,claro,oscuros,mediano,claro,2,futbolAmericano,hasta primaria,no,no
+326,oscuro,claros,bajo,claro,1,futbolAmericano,universitario,si,no
+327,claro,claros,mediano,claro,1,badminton,hasta secundaria,no,no
+328,oscuro,claros,mediano,oscuro,1,golf,hasta primaria,si,no
+329,oscuro,oscuros,alto,claro,1,billar,universitario,no,no
+330,claro,claros,mediano,claro,3,croquet,hasta secundaria,no,no
+331,oscuro,claros,alto,oscuro,3,golf,hasta primaria,si,no
+332,claro,oscuros,bajo,oscuro,3,voleiball,universitario,no,no
+333,oscuro,oscuros,alto,claro,3,squash,universitario,no,no
+334,oscuro,oscuros,mediano,oscuro,3,floorBall,universitario,no,no
+335,claro,oscuros,bajo,claro,2,futbolAmericano,hasta primaria,si,no
+336,oscuro,oscuros,mediano,oscuro,1,billar,hasta secundaria,si,si
+337,oscuro,claros,mediano,oscuro,1,voleiball,hasta primaria,no,no
+338,oscuro,oscuros,bajo,claro,1,golf,hasta secundaria,si,no
+339,oscuro,oscuros,alto,oscuro,1,polo,hasta secundaria,no,no
+340,oscuro,oscuros,bajo,claro,2,paddle,universitario,no,no
+341,oscuro,oscuros,mediano,claro,3,polo,universitario,no,no
+342,claro,claros,bajo,claro,1,croquet,universitario,si,no
+343,claro,claros,bajo,claro,2,paddle,hasta primaria,no,no
+344,oscuro,oscuros,alto,claro,2,basquetball,hasta secundaria,no,no
+345,oscuro,oscuros,alto,claro,2,badminton,universitario,si,no
+346,oscuro,oscuros,bajo,claro,2,basquetball,hasta secundaria,si,si
+347,oscuro,claros,alto,claro,3,atletismo,hasta secundaria,no,no
+348,claro,oscuros,mediano,claro,3,pingPong,universitario,si,no
+349,claro,claros,alto,oscuro,2,futbol,universitario,no,no
+350,oscuro,claros,alto,oscuro,3,billar,hasta primaria,si,no

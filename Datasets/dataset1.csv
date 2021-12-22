@@ -1,0 +1,351 @@
+id,colorCabello,colorOjos,estatura,colorPiel,cantIdiomas,deporteFav,estudiosAc,tomaMate,esArgentino
+1,claro,oscuros,alto,oscuro,3,baseball,hasta primaria,no,no
+2,oscuro,oscuros,bajo,claro,3,baseball,hasta primaria,si,no
+3,oscuro,claros,mediano,oscuro,3,futbol,hasta primaria,si,no
+4,claro,oscuros,alto,oscuro,3,futbol,hasta secundaria,no,no
+5,claro,oscuros,alto,claro,1,futbol,hasta primaria,no,no
+6,claro,oscuros,alto,claro,2,baseball,universitario,si,si
+7,oscuro,claros,mediano,claro,1,baseball,hasta primaria,no,no
+8,oscuro,oscuros,mediano,oscuro,3,baseball,hasta secundaria,no,no
+9,claro,claros,bajo,oscuro,1,futbol,hasta primaria,si,si
+10,oscuro,claros,mediano,claro,2,baseball,universitario,si,si
+11,oscuro,oscuros,alto,claro,1,futbol,hasta primaria,no,no
+12,oscuro,oscuros,alto,claro,2,futbol,universitario,no,no
+13,claro,claros,bajo,oscuro,3,baseball,hasta secundaria,si,no
+14,oscuro,oscuros,alto,oscuro,2,futbol,hasta primaria,si,si
+15,oscuro,oscuros,alto,oscuro,1,futbol,universitario,no,no
+16,oscuro,claros,alto,oscuro,3,futbol,universitario,no,no
+17,oscuro,oscuros,bajo,claro,2,baseball,hasta secundaria,no,no
+18,claro,claros,alto,oscuro,1,futbol,universitario,si,no
+19,oscuro,oscuros,bajo,claro,2,baseball,hasta primaria,si,si
+20,oscuro,claros,mediano,claro,3,baseball,hasta primaria,si,no
+21,claro,claros,mediano,claro,1,futbol,hasta secundaria,si,si
+22,oscuro,claros,bajo,claro,2,baseball,universitario,si,si
+23,claro,oscuros,bajo,claro,2,baseball,universitario,no,no
+24,claro,claros,bajo,claro,2,futbol,hasta primaria,no,no
+25,claro,oscuros,bajo,claro,2,baseball,hasta secundaria,si,si
+26,oscuro,oscuros,mediano,claro,1,baseball,hasta primaria,no,no
+27,claro,oscuros,bajo,claro,1,baseball,universitario,no,no
+28,claro,oscuros,alto,oscuro,1,futbol,hasta secundaria,si,si
+29,oscuro,oscuros,mediano,claro,1,futbol,universitario,si,si
+30,claro,claros,mediano,oscuro,3,futbol,hasta secundaria,no,no
+31,oscuro,oscuros,mediano,oscuro,2,futbol,universitario,no,no
+32,oscuro,oscuros,mediano,oscuro,1,baseball,hasta primaria,si,si
+33,oscuro,claros,bajo,oscuro,1,futbol,hasta primaria,si,si
+34,oscuro,claros,mediano,oscuro,1,baseball,hasta secundaria,no,no
+35,claro,oscuros,bajo,claro,3,futbol,hasta secundaria,no,no
+36,oscuro,claros,bajo,oscuro,2,baseball,hasta primaria,si,si
+37,oscuro,oscuros,bajo,claro,3,futbol,hasta secundaria,no,no
+38,claro,oscuros,bajo,claro,2,baseball,hasta secundaria,si,si
+39,claro,claros,mediano,claro,1,baseball,hasta secundaria,si,no
+40,claro,claros,mediano,claro,3,baseball,hasta secundaria,no,no
+41,claro,claros,alto,claro,1,futbol,hasta primaria,no,no
+42,oscuro,oscuros,bajo,oscuro,3,futbol,universitario,no,no
+43,claro,claros,alto,claro,3,futbol,universitario,si,no
+44,claro,oscuros,mediano,oscuro,1,baseball,hasta secundaria,si,si
+45,oscuro,claros,bajo,oscuro,3,baseball,hasta primaria,no,no
+46,claro,claros,bajo,claro,2,futbol,hasta secundaria,no,no
+47,claro,oscuros,bajo,claro,2,baseball,hasta primaria,si,si
+48,claro,claros,alto,claro,3,futbol,hasta secundaria,no,no
+49,oscuro,claros,mediano,oscuro,1,baseball,hasta secundaria,no,no
+50,claro,oscuros,mediano,claro,2,futbol,universitario,no,no
+51,oscuro,claros,alto,oscuro,3,futbol,universitario,si,no
+52,claro,oscuros,mediano,oscuro,3,baseball,hasta primaria,no,no
+53,oscuro,claros,mediano,claro,3,baseball,hasta secundaria,si,no
+54,oscuro,oscuros,bajo,claro,1,futbol,hasta secundaria,no,no
+55,oscuro,oscuros,bajo,oscuro,3,futbol,universitario,si,no
+56,claro,claros,bajo,oscuro,1,futbol,universitario,si,si
+57,claro,oscuros,mediano,claro,1,futbol,universitario,si,si
+58,claro,claros,alto,claro,1,futbol,hasta secundaria,no,no
+59,oscuro,claros,alto,oscuro,1,baseball,universitario,no,no
+60,claro,claros,alto,claro,3,baseball,hasta primaria,si,no
+61,claro,claros,bajo,oscuro,1,futbol,hasta primaria,no,no
+62,claro,oscuros,alto,oscuro,1,futbol,universitario,si,si
+63,oscuro,claros,alto,oscuro,1,futbol,universitario,no,no
+64,claro,claros,alto,claro,1,baseball,universitario,no,no
+65,claro,claros,mediano,oscuro,2,baseball,hasta primaria,si,no
+66,claro,claros,mediano,claro,3,futbol,hasta secundaria,no,no
+67,claro,claros,bajo,claro,1,baseball,hasta secundaria,si,no
+68,claro,oscuros,mediano,claro,3,baseball,hasta primaria,si,no
+69,claro,claros,bajo,claro,3,baseball,hasta secundaria,no,no
+70,oscuro,oscuros,alto,oscuro,2,futbol,hasta secundaria,no,no
+71,claro,claros,mediano,oscuro,3,baseball,universitario,no,no
+72,oscuro,claros,mediano,oscuro,3,futbol,hasta secundaria,no,no
+73,oscuro,claros,mediano,oscuro,3,futbol,hasta primaria,no,no
+74,claro,oscuros,bajo,claro,3,baseball,hasta primaria,no,no
+75,claro,claros,bajo,oscuro,3,baseball,universitario,si,no
+76,oscuro,claros,alto,oscuro,1,futbol,hasta primaria,si,si
+77,oscuro,oscuros,bajo,oscuro,3,baseball,hasta primaria,si,no
+78,claro,claros,bajo,oscuro,1,futbol,hasta primaria,no,no
+79,oscuro,claros,alto,claro,1,futbol,universitario,si,si
+80,oscuro,oscuros,mediano,claro,2,baseball,hasta secundaria,no,no
+81,claro,claros,alto,oscuro,1,futbol,universitario,si,no
+82,claro,claros,bajo,claro,3,baseball,hasta secundaria,si,no
+83,oscuro,oscuros,mediano,oscuro,3,futbol,universitario,no,no
+84,claro,oscuros,bajo,claro,2,futbol,hasta primaria,no,no
+85,claro,oscuros,alto,oscuro,2,futbol,hasta primaria,si,si
+86,oscuro,claros,alto,claro,2,baseball,universitario,si,si
+87,claro,claros,mediano,claro,2,baseball,hasta primaria,no,no
+88,claro,claros,mediano,oscuro,2,futbol,hasta primaria,si,si
+89,claro,oscuros,bajo,claro,3,futbol,universitario,si,no
+90,claro,oscuros,mediano,claro,2,baseball,hasta primaria,no,no
+91,oscuro,oscuros,bajo,oscuro,3,baseball,hasta primaria,si,no
+92,oscuro,claros,alto,oscuro,3,baseball,hasta secundaria,si,no
+93,oscuro,claros,bajo,oscuro,3,futbol,hasta secundaria,no,no
+94,oscuro,oscuros,alto,oscuro,2,baseball,hasta primaria,no,no
+95,oscuro,oscuros,alto,claro,1,futbol,universitario,no,no
+96,oscuro,oscuros,mediano,oscuro,1,futbol,hasta secundaria,no,no
+97,claro,claros,mediano,claro,1,baseball,universitario,si,no
+98,oscuro,claros,bajo,claro,3,baseball,hasta primaria,si,no
+99,claro,claros,mediano,claro,3,futbol,universitario,si,no
+100,oscuro,oscuros,mediano,oscuro,3,baseball,hasta primaria,si,no
+101,oscuro,oscuros,bajo,claro,1,baseball,hasta secundaria,no,no
+102,oscuro,claros,bajo,oscuro,3,baseball,universitario,si,no
+103,claro,claros,alto,claro,3,futbol,hasta primaria,no,no
+104,oscuro,oscuros,mediano,claro,2,baseball,universitario,no,no
+105,oscuro,oscuros,alto,oscuro,1,futbol,hasta secundaria,no,no
+106,oscuro,oscuros,bajo,oscuro,3,futbol,hasta secundaria,si,no
+107,claro,oscuros,bajo,claro,1,futbol,universitario,si,si
+108,claro,claros,bajo,claro,1,baseball,hasta primaria,no,no
+109,oscuro,claros,bajo,claro,2,futbol,hasta secundaria,no,no
+110,oscuro,oscuros,bajo,claro,1,baseball,hasta primaria,si,si
+111,oscuro,oscuros,bajo,claro,3,futbol,hasta primaria,si,no
+112,oscuro,oscuros,alto,claro,3,baseball,universitario,si,no
+113,oscuro,claros,bajo,oscuro,3,baseball,hasta secundaria,no,no
+114,oscuro,oscuros,alto,oscuro,1,baseball,hasta primaria,no,no
+115,oscuro,claros,alto,oscuro,2,futbol,hasta secundaria,no,no
+116,claro,oscuros,alto,oscuro,2,futbol,universitario,si,si
+117,oscuro,oscuros,alto,claro,1,futbol,universitario,si,si
+118,claro,oscuros,mediano,oscuro,1,baseball,hasta primaria,si,si
+119,claro,oscuros,mediano,claro,2,futbol,hasta primaria,no,no
+120,claro,claros,alto,oscuro,3,futbol,hasta secundaria,no,no
+121,oscuro,claros,alto,oscuro,2,futbol,hasta secundaria,si,si
+122,oscuro,claros,alto,oscuro,1,baseball,hasta secundaria,si,si
+123,claro,oscuros,bajo,oscuro,2,futbol,universitario,no,no
+124,oscuro,oscuros,mediano,claro,1,futbol,hasta secundaria,no,no
+125,claro,claros,mediano,oscuro,2,futbol,universitario,si,si
+126,oscuro,oscuros,alto,oscuro,3,futbol,hasta secundaria,no,no
+127,claro,oscuros,bajo,oscuro,2,baseball,universitario,si,si
+128,oscuro,oscuros,bajo,claro,3,baseball,hasta secundaria,si,no
+129,oscuro,oscuros,alto,claro,2,baseball,hasta secundaria,si,si
+130,claro,claros,alto,oscuro,2,futbol,hasta secundaria,si,no
+131,oscuro,claros,mediano,oscuro,2,futbol,hasta primaria,si,si
+132,claro,claros,mediano,claro,3,baseball,hasta secundaria,no,no
+133,claro,claros,bajo,claro,3,futbol,universitario,si,no
+134,claro,claros,mediano,claro,3,futbol,hasta primaria,si,no
+135,claro,oscuros,alto,oscuro,3,futbol,hasta secundaria,no,no
+136,claro,oscuros,mediano,oscuro,3,futbol,universitario,no,no
+137,claro,oscuros,mediano,oscuro,3,futbol,hasta secundaria,no,no
+138,oscuro,oscuros,alto,claro,3,futbol,hasta secundaria,no,no
+139,oscuro,oscuros,alto,claro,1,futbol,hasta secundaria,no,no
+140,claro,claros,mediano,oscuro,1,futbol,hasta secundaria,no,no
+141,claro,oscuros,bajo,oscuro,3,baseball,hasta secundaria,si,no
+142,claro,claros,alto,oscuro,2,futbol,hasta primaria,si,no
+143,claro,claros,bajo,oscuro,2,futbol,hasta secundaria,si,si
+144,claro,claros,bajo,oscuro,3,baseball,universitario,si,no
+145,claro,claros,mediano,claro,2,baseball,hasta secundaria,si,no
+146,oscuro,oscuros,mediano,claro,3,futbol,universitario,si,no
+147,claro,oscuros,bajo,oscuro,2,futbol,hasta secundaria,no,no
+148,claro,claros,bajo,oscuro,2,futbol,hasta primaria,no,no
+149,oscuro,claros,mediano,claro,3,futbol,hasta primaria,no,no
+150,claro,claros,bajo,claro,3,futbol,hasta secundaria,si,no
+151,claro,oscuros,bajo,claro,3,futbol,hasta secundaria,si,no
+152,claro,claros,alto,oscuro,2,baseball,hasta primaria,no,no
+153,claro,oscuros,alto,claro,3,baseball,universitario,no,no
+154,oscuro,oscuros,bajo,claro,1,baseball,hasta primaria,si,si
+155,claro,claros,mediano,claro,3,futbol,universitario,si,no
+156,claro,claros,mediano,claro,1,futbol,hasta secundaria,si,si
+157,claro,oscuros,bajo,claro,2,futbol,hasta primaria,no,no
+158,claro,oscuros,bajo,oscuro,3,baseball,hasta primaria,si,no
+159,claro,oscuros,alto,claro,3,baseball,hasta secundaria,no,no
+160,claro,claros,alto,oscuro,2,futbol,hasta primaria,no,no
+161,claro,oscuros,alto,claro,3,futbol,universitario,no,no
+162,oscuro,claros,alto,claro,2,futbol,hasta primaria,no,no
+163,oscuro,oscuros,alto,oscuro,2,baseball,hasta secundaria,no,no
+164,oscuro,oscuros,mediano,oscuro,1,baseball,universitario,si,si
+165,oscuro,oscuros,bajo,claro,3,futbol,hasta secundaria,si,no
+166,claro,claros,bajo,claro,1,baseball,hasta secundaria,si,no
+167,claro,oscuros,alto,oscuro,1,futbol,hasta primaria,no,no
+168,oscuro,claros,alto,oscuro,2,futbol,universitario,si,si
+169,claro,oscuros,mediano,oscuro,3,futbol,hasta primaria,si,no
+170,claro,claros,bajo,oscuro,1,baseball,hasta secundaria,si,no
+171,oscuro,claros,alto,claro,2,futbol,universitario,no,no
+172,oscuro,claros,alto,oscuro,3,baseball,hasta secundaria,no,no
+173,claro,claros,bajo,oscuro,2,baseball,hasta secundaria,si,no
+174,claro,oscuros,alto,claro,2,futbol,hasta secundaria,no,no
+175,oscuro,claros,mediano,claro,3,futbol,hasta secundaria,no,no
+176,oscuro,claros,bajo,oscuro,1,futbol,hasta primaria,no,no
+177,claro,claros,alto,claro,3,futbol,hasta secundaria,si,no
+178,oscuro,claros,bajo,oscuro,2,baseball,hasta secundaria,no,no
+179,claro,claros,mediano,oscuro,3,futbol,hasta primaria,si,no
+180,claro,claros,alto,claro,1,futbol,universitario,no,no
+181,oscuro,oscuros,mediano,claro,1,futbol,universitario,si,si
+182,oscuro,claros,mediano,oscuro,2,futbol,hasta primaria,si,si
+183,oscuro,claros,bajo,oscuro,2,futbol,universitario,no,no
+184,oscuro,oscuros,alto,oscuro,2,baseball,hasta secundaria,no,no
+185,claro,claros,bajo,oscuro,3,futbol,universitario,no,no
+186,claro,oscuros,bajo,oscuro,3,baseball,universitario,si,no
+187,claro,oscuros,mediano,claro,1,futbol,hasta primaria,si,si
+188,claro,oscuros,alto,oscuro,1,baseball,hasta primaria,no,no
+189,oscuro,claros,alto,claro,1,futbol,hasta primaria,si,si
+190,claro,claros,mediano,claro,1,baseball,hasta secundaria,no,no
+191,claro,claros,mediano,oscuro,3,futbol,hasta secundaria,si,no
+192,claro,oscuros,mediano,oscuro,2,baseball,universitario,no,no
+193,claro,claros,mediano,claro,2,baseball,hasta secundaria,si,no
+194,claro,oscuros,alto,claro,2,baseball,hasta primaria,si,si
+195,oscuro,oscuros,bajo,claro,2,baseball,universitario,no,no
+196,claro,claros,mediano,oscuro,3,baseball,hasta secundaria,no,no
+197,claro,claros,mediano,claro,2,futbol,hasta secundaria,no,no
+198,claro,claros,bajo,oscuro,2,baseball,hasta secundaria,si,no
+199,oscuro,claros,alto,claro,2,baseball,universitario,no,no
+200,claro,oscuros,mediano,oscuro,1,futbol,hasta primaria,si,si
+201,oscuro,claros,alto,oscuro,2,baseball,universitario,no,no
+202,oscuro,oscuros,bajo,claro,3,baseball,hasta primaria,si,no
+203,oscuro,claros,alto,claro,2,baseball,universitario,si,si
+204,oscuro,claros,alto,claro,3,baseball,hasta primaria,si,no
+205,claro,oscuros,bajo,oscuro,1,futbol,hasta primaria,si,si
+206,claro,oscuros,bajo,claro,3,baseball,hasta secundaria,no,no
+207,claro,oscuros,mediano,oscuro,2,futbol,hasta primaria,si,si
+208,oscuro,oscuros,bajo,claro,3,futbol,universitario,no,no
+209,claro,oscuros,alto,oscuro,1,baseball,hasta primaria,no,no
+210,oscuro,oscuros,bajo,oscuro,1,baseball,hasta primaria,si,si
+211,oscuro,oscuros,mediano,oscuro,3,baseball,universitario,no,no
+212,claro,claros,bajo,oscuro,2,baseball,hasta secundaria,no,no
+213,claro,claros,bajo,oscuro,1,baseball,universitario,si,no
+214,oscuro,oscuros,bajo,claro,2,baseball,hasta primaria,no,no
+215,claro,oscuros,bajo,claro,1,baseball,hasta primaria,si,si
+216,claro,oscuros,mediano,claro,2,baseball,hasta secundaria,no,no
+217,oscuro,claros,alto,oscuro,3,futbol,hasta primaria,no,no
+218,oscuro,claros,alto,claro,1,futbol,hasta primaria,no,no
+219,oscuro,claros,bajo,oscuro,1,baseball,hasta primaria,no,no
+220,oscuro,oscuros,alto,claro,2,baseball,hasta primaria,no,no
+221,claro,claros,mediano,claro,2,baseball,hasta primaria,si,no
+222,oscuro,claros,bajo,oscuro,1,baseball,universitario,si,si
+223,claro,oscuros,mediano,claro,2,futbol,hasta secundaria,no,no
+224,oscuro,claros,alto,oscuro,3,baseball,hasta primaria,si,no
+225,claro,oscuros,mediano,oscuro,2,baseball,hasta secundaria,no,no
+226,claro,claros,mediano,claro,1,futbol,hasta secundaria,si,si
+227,oscuro,oscuros,alto,oscuro,3,futbol,hasta secundaria,si,no
+228,oscuro,oscuros,alto,claro,3,baseball,universitario,si,no
+229,oscuro,oscuros,alto,oscuro,2,baseball,universitario,no,no
+230,claro,claros,mediano,claro,2,baseball,hasta primaria,no,no
+231,oscuro,claros,alto,oscuro,1,futbol,hasta secundaria,no,no
+232,oscuro,claros,mediano,oscuro,3,baseball,hasta primaria,no,no
+233,claro,oscuros,mediano,claro,1,futbol,universitario,si,si
+234,oscuro,claros,bajo,oscuro,2,futbol,universitario,si,si
+235,oscuro,oscuros,bajo,oscuro,1,baseball,hasta secundaria,no,no
+236,oscuro,oscuros,mediano,oscuro,3,baseball,universitario,si,no
+237,oscuro,claros,mediano,claro,2,futbol,universitario,no,no
+238,oscuro,oscuros,alto,claro,2,futbol,hasta primaria,si,si
+239,claro,oscuros,alto,oscuro,1,futbol,universitario,si,si
+240,claro,claros,mediano,oscuro,1,futbol,universitario,no,no
+241,oscuro,oscuros,alto,claro,3,futbol,hasta primaria,no,no
+242,claro,oscuros,alto,claro,2,baseball,hasta secundaria,no,no
+243,claro,oscuros,mediano,claro,1,baseball,hasta primaria,no,no
+244,claro,oscuros,bajo,claro,1,futbol,hasta secundaria,si,si
+245,oscuro,oscuros,bajo,claro,2,baseball,hasta primaria,no,no
+246,oscuro,oscuros,alto,oscuro,1,futbol,hasta secundaria,no,no
+247,claro,claros,alto,claro,1,futbol,hasta secundaria,si,no
+248,claro,oscuros,alto,claro,1,baseball,hasta primaria,no,no
+249,oscuro,claros,mediano,oscuro,1,baseball,hasta primaria,si,si
+250,claro,claros,mediano,claro,1,baseball,hasta secundaria,no,no
+251,claro,claros,mediano,oscuro,2,futbol,universitario,si,si
+252,claro,oscuros,alto,oscuro,3,baseball,hasta secundaria,si,no
+253,oscuro,oscuros,mediano,claro,2,baseball,hasta primaria,si,si
+254,claro,oscuros,bajo,claro,1,futbol,universitario,no,no
+255,oscuro,claros,bajo,claro,2,baseball,universitario,si,si
+256,oscuro,oscuros,alto,claro,3,baseball,hasta secundaria,si,no
+257,claro,oscuros,alto,oscuro,1,futbol,hasta primaria,si,si
+258,oscuro,claros,mediano,claro,1,futbol,hasta secundaria,si,si
+259,oscuro,claros,alto,oscuro,2,futbol,hasta primaria,si,si
+260,claro,claros,bajo,oscuro,2,baseball,hasta primaria,no,no
+261,oscuro,claros,alto,oscuro,1,baseball,hasta primaria,no,no
+262,claro,claros,mediano,claro,2,futbol,hasta secundaria,si,si
+263,claro,claros,alto,oscuro,2,futbol,hasta secundaria,no,no
+264,oscuro,claros,alto,oscuro,2,futbol,hasta secundaria,si,si
+265,claro,oscuros,bajo,claro,3,baseball,hasta secundaria,no,no
+266,claro,oscuros,mediano,claro,3,futbol,hasta secundaria,si,no
+267,claro,oscuros,mediano,oscuro,1,futbol,hasta secundaria,si,si
+268,oscuro,oscuros,alto,oscuro,3,futbol,hasta primaria,no,no
+269,oscuro,oscuros,alto,oscuro,3,baseball,universitario,si,no
+270,claro,claros,alto,oscuro,2,baseball,hasta secundaria,si,no
+271,claro,oscuros,bajo,claro,3,baseball,hasta primaria,no,no
+272,claro,claros,bajo,claro,3,baseball,universitario,no,no
+273,oscuro,claros,mediano,claro,3,baseball,hasta secundaria,no,no
+274,claro,claros,mediano,claro,3,baseball,universitario,no,no
+275,oscuro,oscuros,alto,oscuro,3,futbol,universitario,no,no
+276,oscuro,oscuros,alto,oscuro,2,baseball,universitario,si,si
+277,oscuro,claros,alto,oscuro,1,futbol,hasta primaria,si,si
+278,claro,oscuros,alto,oscuro,1,futbol,hasta secundaria,si,si
+279,oscuro,oscuros,bajo,claro,3,futbol,hasta secundaria,si,no
+280,claro,oscuros,mediano,oscuro,1,baseball,hasta primaria,no,no
+281,oscuro,oscuros,bajo,claro,2,futbol,hasta secundaria,no,no
+282,oscuro,claros,bajo,oscuro,1,futbol,hasta primaria,si,si
+283,oscuro,oscuros,alto,oscuro,3,futbol,hasta primaria,si,no
+284,oscuro,oscuros,mediano,claro,2,futbol,hasta primaria,si,si
+285,oscuro,claros,bajo,oscuro,2,baseball,hasta primaria,no,no
+286,claro,oscuros,mediano,claro,1,baseball,hasta primaria,no,no
+287,claro,claros,mediano,claro,2,futbol,hasta primaria,no,no
+288,oscuro,oscuros,bajo,claro,2,baseball,universitario,si,si
+289,oscuro,oscuros,mediano,oscuro,1,baseball,hasta primaria,si,si
+290,oscuro,oscuros,bajo,oscuro,3,baseball,universitario,no,no
+291,claro,oscuros,bajo,oscuro,2,futbol,hasta primaria,no,no
+292,claro,claros,mediano,oscuro,2,baseball,universitario,no,no
+293,claro,oscuros,alto,oscuro,3,baseball,universitario,si,no
+294,oscuro,oscuros,alto,claro,1,baseball,hasta primaria,si,si
+295,claro,claros,bajo,oscuro,2,futbol,hasta secundaria,no,no
+296,claro,claros,bajo,claro,3,futbol,universitario,si,no
+297,claro,claros,mediano,claro,2,baseball,universitario,no,no
+298,oscuro,oscuros,bajo,oscuro,2,futbol,hasta primaria,no,no
+299,claro,claros,mediano,oscuro,1,futbol,universitario,si,si
+300,claro,oscuros,bajo,claro,1,futbol,universitario,si,si
+301,claro,claros,bajo,claro,1,futbol,hasta primaria,si,si
+302,oscuro,claros,mediano,oscuro,2,futbol,hasta secundaria,si,si
+303,claro,oscuros,mediano,claro,2,futbol,hasta primaria,si,si
+304,claro,oscuros,bajo,claro,1,baseball,hasta secundaria,si,si
+305,oscuro,claros,bajo,oscuro,3,baseball,hasta secundaria,no,no
+306,oscuro,claros,alto,oscuro,2,baseball,hasta primaria,no,no
+307,oscuro,oscuros,alto,oscuro,1,baseball,hasta secundaria,si,si
+308,oscuro,claros,bajo,claro,3,baseball,hasta primaria,no,no
+309,oscuro,claros,mediano,oscuro,1,futbol,hasta secundaria,no,no
+310,claro,claros,mediano,claro,1,baseball,hasta primaria,no,no
+311,claro,claros,mediano,claro,3,baseball,hasta primaria,no,no
+312,oscuro,oscuros,bajo,claro,1,baseball,hasta secundaria,no,no
+313,oscuro,claros,bajo,claro,3,baseball,hasta secundaria,si,no
+314,claro,oscuros,mediano,oscuro,1,baseball,universitario,no,no
+315,claro,oscuros,mediano,claro,1,futbol,universitario,si,si
+316,oscuro,oscuros,alto,claro,1,baseball,hasta primaria,si,si
+317,oscuro,claros,alto,claro,3,futbol,hasta secundaria,si,no
+318,claro,oscuros,alto,claro,2,futbol,hasta primaria,no,no
+319,claro,oscuros,bajo,claro,3,futbol,universitario,si,no
+320,claro,oscuros,alto,claro,3,baseball,hasta secundaria,no,no
+321,claro,claros,mediano,oscuro,3,baseball,hasta primaria,no,no
+322,oscuro,claros,alto,claro,1,futbol,universitario,no,no
+323,oscuro,claros,bajo,claro,3,baseball,hasta secundaria,no,no
+324,oscuro,oscuros,alto,oscuro,3,futbol,hasta secundaria,si,no
+325,claro,oscuros,bajo,oscuro,1,futbol,hasta primaria,si,si
+326,oscuro,claros,alto,oscuro,2,futbol,universitario,si,si
+327,claro,claros,bajo,oscuro,2,futbol,hasta secundaria,no,no
+328,oscuro,claros,mediano,oscuro,1,baseball,hasta secundaria,si,si
+329,claro,claros,bajo,claro,1,baseball,hasta primaria,si,no
+330,oscuro,oscuros,alto,claro,3,futbol,hasta secundaria,si,no
+331,claro,claros,bajo,claro,1,futbol,hasta primaria,no,no
+332,oscuro,claros,bajo,oscuro,1,baseball,hasta secundaria,no,no
+333,claro,oscuros,alto,oscuro,2,futbol,hasta secundaria,si,si
+334,oscuro,oscuros,mediano,oscuro,1,baseball,universitario,si,si
+335,oscuro,oscuros,alto,claro,1,futbol,hasta secundaria,si,si
+336,claro,claros,bajo,claro,2,baseball,universitario,no,no
+337,claro,claros,alto,oscuro,2,futbol,universitario,no,no
+338,claro,oscuros,alto,oscuro,2,baseball,hasta primaria,no,no
+339,claro,oscuros,mediano,oscuro,1,baseball,hasta primaria,si,si
+340,claro,oscuros,mediano,oscuro,3,futbol,hasta primaria,si,no
+341,oscuro,claros,mediano,oscuro,3,baseball,hasta primaria,no,no
+342,claro,oscuros,alto,claro,3,baseball,hasta primaria,si,no
+343,claro,oscuros,mediano,oscuro,2,futbol,hasta secundaria,no,no
+344,oscuro,oscuros,bajo,oscuro,1,futbol,hasta primaria,no,no
+345,oscuro,oscuros,bajo,claro,2,baseball,hasta primaria,no,no
+346,oscuro,claros,alto,claro,2,futbol,universitario,no,no
+347,oscuro,claros,bajo,oscuro,3,futbol,hasta primaria,si,no
+348,claro,claros,bajo,oscuro,3,baseball,universitario,no,no
+349,claro,oscuros,mediano,oscuro,2,futbol,hasta primaria,no,no
+350,oscuro,oscuros,bajo,oscuro,1,baseball,universitario,no,no
